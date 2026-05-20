@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlexaSense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,400&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">Flexa<span>Sense</span></div>
+  <div class="topbar-center">
+    <div class="session-pill">
+      <span class="session-dot"></span>
+      Session WoZ-03 &middot; <span id="session-time">00:00</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="metric-pills">
+      <div class="metric-pill">Ctx-loss <b id="m-ctx">0</b></div>
+      <div class="metric-pill warn">Fail refs <b id="m-dei">0</b></div>
+      <div class="metric-pill">Links <b id="m-links">0</b></div>
+      <div class="metric-pill">Files <b id="m-files">0</b></div>
+    </div>
+    <button class="tbtn" onclick="resetSession()">&#8635; Reset</button>
+  </div>
+</header>
+
+<div class="workspace" id="workspace">
+
+  <!-- VIEWER PANEL -->
+  <div class="panel viewer-panel" id="viewer-panel">
+    <div class="panel-header" id="viewer-header">
+      <div class="panel-tabs">
+        <button class="ptab active" data-tab="pdf"      onclick="switchViewTab('pdf',this)">PDF</button>
+        <button class="ptab"        data-tab="video"    onclick="switchViewTab('video',this)">Video</button>
+        <button class="ptab"        data-tab="notebook" onclick="switchViewTab('notebook',this)">Notebook</button>
+      </div>
+      <div class="panel-header-right">
+        <div class="file-name-tag" id="viewer-filename">No file loaded</div>
+        <button class="collapse-btn" onclick="collapsePanel('viewer-panel','h','&#9664;','&#9654;')">&#9664;</button>
+      </div>
+    </div>
+
+    <!-- PDF PANE -->
+    <div class="view-pane" id="view-pdf">
+      <div class="dropzone" id="dz-pdf"
+           ondragover="dzOver(event,this)" ondragleave="dzLeave(this)" ondrop="dzDrop(event,'pdf')">
+        <div class="dz-icon">&#x1F4C4;</div>
+        <div class="dz-title">Drop your PDF here</div>
+        <div class="dz-sub">Highlights and comments link to canvas cards</div>
+        <button class="dz-btn" onclick="document.getElementById('inp-pdf').click()">Browse PDF</button>
+      </div>
+      <input type="file" id="inp-pdf" accept=".pdf" style="display:none" onchange="uploadFile(this,'pdf')">
+
+      <div class="pdf-reader" id="pdf-reader" style="display:none;flex-direction:column;height:100%">
+        <div class="pdf-toolbar">
+          <button class="pdf-nav-btn" onclick="pdfPrevPage()">&#8249;</button>
+          <span class="pdf-page-info">
+            <span id="pdf-cur-page">1</span> / <span id="pdf-total-pages">&#8212;</span>
+          </span>
+          <button class="pdf-nav-btn" onclick="pdfNextPage()">&#8250;</button>
+          <div class="pdf-toolbar-sep"></div>
+          <button class="pdf-zoom-btn" onclick="pdfZoom(-0.25)">&#8722;</button>
+          <span class="pdf-zoom-label" id="pdf-zoom-label">100%</span>
+          <button class="pdf-zoom-btn" onclick="pdfZoom(+0.25)">+</button>
+          <div class="pdf-toolbar-sep"></div>
+          <button class="pdf-tool-btn" id="ptool-cursor"    onclick="setPdfTool('cursor')"    title="Pan / select">&#8598; Select</button>
+          <button class="pdf-tool-btn" id="ptool-highlight" onclick="setPdfTool('highlight')" title="Highlight text">&#x1F58A; Highlight</button>
+          <button class="pdf-tool-btn" id="ptool-comment"   onclick="setPdfTool('comment')"   title="Add comment">&#x1F4AC; Comment</button>
+          <button class="pdf-tool-btn" id="ptool-link"      onclick="setPdfTool('link')"      title="Link selection to canvas">&#x1F517; Link</button>
+          <div class="pdf-toolbar-sep"></div>
+          <span class="toolbar-label" id="pdf-name-label"></span>
+          <button class="pdf-replace-btn" onclick="document.getElementById('inp-pdf').click()" title="Upload another PDF">&#8644;</button>
+        </div>
+        <div class="pdf-status-bar" id="pdf-status-bar">
+          <span id="pdf-status-msg">Select tool active</span>
+        </div>
+        <div class="pdf-viewport-wrap" id="pdf-viewport-wrap">
+          <div class="pdf-pages-container" id="pdf-pages-container"></div>
+          <div class="pdf-annotation-layer" id="pdf-annotation-layer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIDEO PANE -->
+    <div class="view-pane" id="view-video" style="display:none">
+      <div class="dropzone" id="dz-video"
+           ondragover="dzOver(event,this)" ondragleave="dzLeave(this)" ondrop="dzDrop(event,'video')">
+        <div class="dz-icon">&#x1F3AC;</div>
+        <div class="dz-title">Drop your video here</div>
+        <div class="dz-sub">Timestamps become linkable anchors</div>
+        <button class="dz-btn" onclick="document.getElementById('inp-video').click()">Browse Video</button>
+      </div>
+      <input type="file" id="inp-video" accept="video/*" style="display:none" onchange="uploadFile(this,'video')">
+
+      <div class="video-reader" id="video-reader" style="display:none;flex-direction:column;height:100%">
+        <div class="pdf-toolbar">
+          <span class="toolbar-label" id="video-name-label"></span>
+          <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
+            <button class="pdf-tool-btn active" onclick="linkCurrentTimestamp()">&#x1F4CD; Link Timestamp</button>
+            <button class="pdf-replace-btn" onclick="document.getElementById('inp-video').click()">&#8644;</button>
+          </div>
+        </div>
+        <video id="video-player" controls style="width:100%;flex:1;min-height:0;object-fit:contain;background:#000;display:block"></video>
+        <div class="ts-panel" id="ts-panel">
+          <div class="ts-panel-label">Linked Timestamps <span id="ts-count" style="font-weight:400;color:var(--ink-4)">(0)</span></div>
+          <div class="ts-list" id="ts-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTEBOOK PANE -->
+    <div class="view-pane" id="view-notebook" style="display:none">
+      <div class="dropzone" id="dz-notebook"
+           ondragover="dzOver(event,this)" ondragleave="dzLeave(this)" ondrop="dzDrop(event,'notebook')">
+        <div class="dz-icon">&#x1F4D3;</div>
+        <div class="dz-title">Drop your notebook here</div>
+        <div class="dz-sub">.ipynb &middot; .py &middot; .txt &mdash; click lines to link</div>
+        <button class="dz-btn" onclick="document.getElementById('inp-nb').click()">Browse Notebook</button>
+      </div>
+      <input type="file" id="inp-nb" accept=".ipynb,.py,.txt,.json" style="display:none" onchange="uploadFile(this,'notebook')">
+
+      <div class="nb-reader" id="nb-reader" style="display:none;flex-direction:column;height:100%">
+        <div class="pdf-toolbar">
+          <span class="toolbar-label" id="nb-name-label"></span>
+          <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
+            <button class="pdf-tool-btn" id="nb-link-btn" onclick="toggleNbLinkMode()">&#x1F517; Link Mode</button>
+            <button class="pdf-replace-btn" onclick="document.getElementById('inp-nb').click()">&#8644;</button>
+          </div>
+        </div>
+        <div class="nb-content" id="nb-content"></div>
+      </div>
+    </div>
+
+  </div><!-- /viewer-panel -->
+
+  <div class="splitter splitter-v" id="sp-main" onmousedown="startDrag(event,this,'h')"></div>
+
+  <!-- CANVAS PANEL -->
+  <div class="panel canvas-panel" id="canvas-panel">
+    <div class="panel-header canvas-header">
+      <div class="canvas-header-left">
+        <span class="canvas-title">Open Canvas</span>
+        <span class="canvas-subtitle" id="canvas-subtitle">0 elements</span>
+      </div>
+      <div class="canvas-toolbar">
+        <button class="ctool on" id="tool-select" onclick="setCanvasTool('select')">&#8598; Select</button>
+        <button class="ctool"    id="tool-sticky" onclick="setCanvasTool('sticky')">&#x1F4CC; Sticky</button>
+        <div class="canvas-attach-menu">
+          <button class="ctool" onclick="toggleAttachMenu()">&#x1F4CE; Attach &#9660;</button>
+          <div class="attach-dropdown" id="attach-dropdown">
+            <div class="attach-option" onclick="attachToCanvas('pdf')">&#x1F4C4; Attach PDF card</div>
+            <div class="attach-option" onclick="attachToCanvas('video')">&#x1F3AC; Attach Video card</div>
+            <div class="attach-option" onclick="attachToCanvas('notebook')">&#x1F4D3; Attach Code card</div>
+            <div class="attach-option" onclick="attachToCanvas('link')">&#x1F517; Cross-modal Link card</div>
+          </div>
+        </div>
+        <button class="ctool" onclick="clearCanvas()">&#x1F5D1; Clear</button>
+      </div>
+      <button class="collapse-btn" onclick="collapsePanel('canvas-panel','h','&#9654;','&#9664;')">&#9654;</button>
+    </div>
+
+    <div class="link-indicator" id="link-indicator" style="display:none">
+      <div class="link-indicator-inner">
+        <span class="link-pulse"></span>
+        <span id="link-indicator-text">Click a canvas card to complete the link&hellip;</span>
+        <button onclick="cancelLink()">&#x2715; Cancel</button>
+      </div>
+    </div>
+
+    <div class="canvas-surface" id="canvas-surface" onclick="canvasClick(event)">
+      <div id="canvas-world" style="position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform;min-width:4000px;min-height:4000px">
+        <svg id="link-lines-svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible">
+          <defs id="svg-defs"></defs>
+        </svg>
+      </div>
+    </div>
+    <div class="canvas-zoom-controls">
+      <button id="canvas-zoom-in"    class="czoom-btn" title="Zoom in">+</button>
+      <span   id="canvas-zoom-label" class="czoom-label">100%</span>
+      <button id="canvas-zoom-out"   class="czoom-btn" title="Zoom out">&#8722;</button>
+      <button id="canvas-zoom-reset" class="czoom-btn czoom-reset" title="Reset zoom">&#8962;</button>
+      <span class="czoom-hint">Scroll to zoom &middot; Space+drag to pan</span>
+    </div>
+
+    <div class="canvas-files-bar">
+      <div class="cfb-label">Files</div>
+      <div class="cfb-list" id="cfb-list"></div>
+      <button class="cfb-add" onclick="openUploadPicker()">+ Upload</button>
+    </div>
+  </div>
+
+</div><!-- /workspace -->
+
+<!-- ANNOTATION TOOLTIP (appears after text selection in PDF) -->
+<div class="annot-tooltip" id="annot-tooltip" style="display:none">
+  <button class="annot-btn highlight-btn" onclick="applyAnnotation('highlight')">&#x1F58A; Highlight</button>
+  <button class="annot-btn comment-btn"   onclick="applyAnnotation('comment')">&#x1F4AC; Comment</button>
+  <button class="annot-btn link-btn"      onclick="applyAnnotation('link')">&#x1F517; Link to canvas</button>
+</div>
+
+<!-- COMMENT POPOVER -->
+<div class="comment-popover" id="comment-popover" style="display:none">
+  <div class="comment-popover-header">Add comment</div>
+  <textarea class="comment-input" id="comment-input" placeholder="Type your comment&hellip;" rows="3"></textarea>
+  <div class="comment-popover-actions">
+    <button class="btn-secondary" onclick="cancelComment()">Cancel</button>
+    <button class="btn-primary"   onclick="saveComment()">Add</button>
+  </div>
+</div>
+
+<!-- CARD EDITOR MODAL -->
+<div class="modal-overlay" id="card-modal" style="display:none" onclick="closeCardModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Edit Card</div>
+      <button class="modal-close" onclick="closeCardModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- UPLOAD PICKER MODAL -->
+<div class="modal-overlay" id="upload-modal" style="display:none" onclick="closeUploadModal(event)">
+  <div class="modal upload-modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title">Upload File</div>
+      <button class="modal-close" onclick="closeUploadModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <div class="upload-grid">
+        <label class="upload-tile">
+          <div class="upload-tile-icon">&#x1F4C4;</div>
+          <div class="upload-tile-label">PDF</div>
+          <div class="upload-tile-sub">.pdf</div>
+          <input type="file" accept=".pdf" style="display:none"
+                 onchange="uploadFile(this,'pdf');closeUploadModal()">
+        </label>
+        <label class="upload-tile">
+          <div class="upload-tile-icon">&#x1F3AC;</div>
+          <div class="upload-tile-label">Video</div>
+          <div class="upload-tile-sub">.mp4 .mov .webm</div>
+          <input type="file" accept="video/*" style="display:none"
+                 onchange="uploadFile(this,'video');closeUploadModal()">
+        </label>
+        <label class="upload-tile">
+          <div class="upload-tile-icon">&#x1F4D3;</div>
+          <div class="upload-tile-label">Notebook</div>
+          <div class="upload-tile-sub">.ipynb .py .txt</div>
+          <input type="file" accept=".ipynb,.py,.txt,.json" style="display:none"
+                 onchange="uploadFile(this,'notebook');closeUploadModal()">
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="toast-dot" id="toast-dot"></span>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+<script src="/static/js/resize.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="/static/js/pdf_viewer.js"></script>
+<script src="/static/js/viewer.js"></script>
+<script src="/static/js/canvas.js"></script>
+<script src="/static/js/links.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
