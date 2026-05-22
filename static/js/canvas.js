@@ -119,6 +119,8 @@ function applyTransform() {
   const world = document.getElementById('canvas-world');
   if (world) world.style.transform = `translate(${_panX}px, ${_panY}px) scale(${_zoom})`;
   updateZoomLabel();
+  // Redraw link lines (they live in a fixed SVG overlay, need screen coords refresh)
+  if (typeof redrawLinks === 'function') requestAnimationFrame(redrawLinks);
 }
 
 function canvasZoomBtn(factor) {
@@ -253,29 +255,46 @@ function createLiveCard(fileEntry, x, y) {
 
 // ─── PDF embed ────────────────────────────────────────────────────────────
 function embedPdfCard(body, entry, cardId) {
-  body.style.cssText = 'background:#525659;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px';
+  body.style.cssText = 'background:#525659;overflow:hidden;display:flex;flex-direction:column';
+
+  // toolbar
   const tb = document.createElement('div');
   tb.className = 'cpdf-toolbar';
   tb.innerHTML = `
     <button class="cpdf-nav" onclick="cpdfPrev('${cardId}')">‹</button>
     <span class="cpdf-info" id="cpdf-info-${cardId}">… / …</span>
     <button class="cpdf-nav" onclick="cpdfNext('${cardId}')">›</button>
-    <button class="cpdf-zoom" onclick="cpdfZoom('${cardId}',-0.2)">−</button>
-    <button class="cpdf-zoom" onclick="cpdfZoom('${cardId}',+0.2)">+</button>`;
+    <button class="cpdf-zoom" onclick="cpdfZoom('${cardId}',-0.25)">−</button>
+    <button class="cpdf-zoom" onclick="cpdfZoom('${cardId}',+0.25)">+</button>
+    <div class="cpdf-sep"></div>
+    <button class="cpdf-annot-btn active" id="cptool-cursor-${cardId}"   onclick="setCPdfTool('${cardId}','cursor')"    title="Select">↖</button>
+    <button class="cpdf-annot-btn"        id="cptool-highlight-${cardId}" onclick="setCPdfTool('${cardId}','highlight')" title="Highlight" style="color:#D97706">🖊</button>
+    <button class="cpdf-annot-btn"        id="cptool-comment-${cardId}"   onclick="setCPdfTool('${cardId}','comment')"   title="Comment"   style="color:#1A8F6F">💬</button>
+    <button class="cpdf-annot-btn"        id="cptool-link-${cardId}"      onclick="setCPdfTool('${cardId}','link')"      title="Link"      style="color:#2563EB">🔗</button>`;
   body.appendChild(tb);
-  const pageWrap = document.createElement('div');
-  pageWrap.id = 'cpdf-pages-' + cardId;
-  pageWrap.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;overflow-y:auto;width:100%';
-  body.appendChild(pageWrap);
-  renderPdfInCard(entry, cardId, pageWrap);
+
+  // page viewport (canvas + text layer stacked)
+  const pageScroll = document.createElement('div');
+  pageScroll.id = 'cpdf-scroll-' + cardId;
+  pageScroll.style.cssText = 'flex:1;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px;min-height:0';
+  body.appendChild(pageScroll);
+
+  // annotation panel (collapsible, below pages)
+  const annotPanel = document.createElement('div');
+  annotPanel.id = 'cpdf-annotpanel-' + cardId;
+  annotPanel.className = 'ccard-annot-panel';
+  annotPanel.innerHTML = '<div class="ccard-annot-label">Annotations <span id="cpdf-annotcount-'+cardId+'">0</span></div><div class="ccard-annot-list" id="cpdf-annotlist-'+cardId+'"></div>';
+  body.appendChild(annotPanel);
+
+  renderPdfInCard(entry, cardId, pageScroll);
 }
 
-const _cpdfState = {};
+const _cpdfState = {};  // cardId -> { doc, scale, page, entry, tool, annotCounter }
 
 async function renderPdfInCard(entry, cardId, container) {
   try {
     const doc = await pdfjsLib.getDocument(entry.path).promise;
-    _cpdfState[cardId] = { doc, scale: 0.9, page: 1, entry };
+    _cpdfState[cardId] = { doc, scale:0.85, page:1, entry, tool:'cursor', annotCounter:0 };
     container.innerHTML = '';
     document.getElementById('cpdf-info-' + cardId).textContent = `1 / ${doc.numPages}`;
     await cpdfRenderPage(cardId, 1, container);
@@ -286,38 +305,241 @@ async function renderPdfInCard(entry, cardId, container) {
 
 async function cpdfRenderPage(cardId, pageNum, container) {
   const state = _cpdfState[cardId]; if (!state) return;
-  container = container || document.getElementById('cpdf-pages-' + cardId);
+  container = container || document.getElementById('cpdf-scroll-' + cardId);
   container.innerHTML = '';
-  const page   = await state.doc.getPage(pageNum);
-  const vp     = page.getViewport({ scale: state.scale });
+
+  const page = await state.doc.getPage(pageNum);
+  const vp   = page.getViewport({ scale: state.scale });
+
+  // Wrapper holds canvas + text layer + annot overlay
+  const wrap = document.createElement('div');
+  wrap.style.cssText = `position:relative;width:${vp.width}px;height:${vp.height}px;flex-shrink:0;box-shadow:0 2px 12px rgba(0,0,0,.5)`;
+
+  // Canvas
   const canvas = document.createElement('canvas');
-  canvas.width  = vp.width;
-  canvas.height = vp.height;
-  canvas.style.cssText = 'box-shadow:0 2px 8px rgba(0,0,0,.4);max-width:100%;display:block';
-  container.appendChild(canvas);
-  await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+  canvas.width = vp.width; canvas.height = vp.height;
+  canvas.style.cssText = 'display:block;position:absolute;top:0;left:0';
+  wrap.appendChild(canvas);
+
+  // Text layer for selection
+  const textDiv = document.createElement('div');
+  textDiv.className = 'cpdf-text-layer';
+  textDiv.style.cssText = `position:absolute;top:0;left:0;width:${vp.width}px;height:${vp.height}px;overflow:hidden;pointer-events:auto;user-select:text;cursor:text`;
+  wrap.appendChild(textDiv);
+
+  // Highlight / annotation overlay
+  const annotOverlay = document.createElement('div');
+  annotOverlay.className = 'cpdf-annot-overlay';
+  annotOverlay.dataset.cardId = cardId;
+  annotOverlay.style.cssText = `position:absolute;top:0;left:0;width:${vp.width}px;height:${vp.height}px;pointer-events:none`;
+  wrap.appendChild(annotOverlay);
+
+  container.appendChild(wrap);
+
+  await page.render({ canvasContext:canvas.getContext('2d'), viewport:vp }).promise;
+  const tc = await page.getTextContent();
+  pdfjsLib.renderTextLayer({ textContent:tc, container:textDiv, viewport:vp, textDivs:[] });
+
   state.page = pageNum;
+  state.pageVp = vp;
+  state.pageWrap = wrap;
+  state.annotOverlay = annotOverlay;
   const info = document.getElementById('cpdf-info-' + cardId);
   if (info) info.textContent = `${pageNum} / ${state.doc.numPages}`;
+
+  // Mouseup → show mini annotation toolbar
+  textDiv.addEventListener('mouseup', (e) => {
+    setTimeout(() => cpdfHandleSelection(cardId, e, annotOverlay, vp, wrap), 30);
+  });
 }
 
-function cpdfPrev(cardId) { const s=_cpdfState[cardId]; if(s&&s.page>1) cpdfRenderPage(cardId,s.page-1); }
-function cpdfNext(cardId) { const s=_cpdfState[cardId]; if(s&&s.page<s.doc.numPages) cpdfRenderPage(cardId,s.page+1); }
-function cpdfZoom(cardId, delta) { const s=_cpdfState[cardId]; if(s){s.scale=Math.max(0.3,Math.min(3,s.scale+delta)); cpdfRenderPage(cardId,s.page);} }
+function cpdfPrev(cardId) { const s=_cpdfState[cardId]; if(s&&s.page>1){const c=document.getElementById('cpdf-scroll-'+cardId);if(c)cpdfRenderPage(cardId,s.page-1,c);} }
+function cpdfNext(cardId) { const s=_cpdfState[cardId]; if(s&&s.page<s.doc.numPages){const c=document.getElementById('cpdf-scroll-'+cardId);if(c)cpdfRenderPage(cardId,s.page+1,c);} }
+function cpdfZoom(cardId,delta) { const s=_cpdfState[cardId]; if(s){s.scale=Math.max(0.3,Math.min(3,s.scale+delta));const c=document.getElementById('cpdf-scroll-'+cardId);if(c)cpdfRenderPage(cardId,s.page,c);} }
+
+function setCPdfTool(cardId, tool) {
+  const state = _cpdfState[cardId]; if (!state) return;
+  state.tool = tool;
+  ['cursor','highlight','comment','link'].forEach(t => {
+    const btn = document.getElementById(`cptool-${t}-${cardId}`);
+    if (btn) btn.classList.toggle('active', t === tool);
+  });
+}
+
+// ─── PDF card annotation on text selection ───────────────────────────────────
+// Shared pending state per card
+const _cpdfPending = {}; // cardId -> { text, normRects, vp, wrap }
+
+function cpdfHandleSelection(cardId, e, annotOverlay, vp, wrap) {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || !sel.toString().trim()) return;
+  const text = sel.toString().trim();
+  const state = _cpdfState[cardId]; if (!state) return;
+
+  // Compute normalized rects relative to the page wrapper
+  const pageRect = wrap.getBoundingClientRect();
+  const normRects = [];
+  if (sel.rangeCount) {
+    Array.from(sel.getRangeAt(0).getClientRects()).forEach(r => {
+      if (r.width < 1 || r.height < 1) return;
+      normRects.push({
+        x:(r.left-pageRect.left)/vp.width,
+        y:(r.top-pageRect.top)/vp.height,
+        w:r.width/vp.width, h:r.height/vp.height
+      });
+    });
+  }
+  _cpdfPending[cardId] = { text, normRects, vp, wrap, annotOverlay };
+
+  if (state.tool === 'cursor') {
+    // Show floating mini-toolbar near selection
+    showCPdfMiniBar(cardId, e.clientX, e.clientY);
+  } else {
+    cpdfApplyAnnot(cardId, state.tool, '');
+    window.getSelection()?.removeAllRanges();
+  }
+}
+
+function showCPdfMiniBar(cardId, cx, cy) {
+  removeCPdfMiniBar();
+  const bar = document.createElement('div');
+  bar.id = 'cpdf-minibar';
+  bar.className = 'cpdf-minibar';
+  bar.style.left = Math.max(4, cx - 80) + 'px';
+  bar.style.top  = Math.max(4, cy - 48) + 'px';
+  bar.innerHTML = `
+    <button onclick="cpdfApplyAnnot('${cardId}','highlight','');removeCPdfMiniBar()" title="Highlight">🖊 Highlight</button>
+    <button onclick="cpdfPromptComment('${cardId}');removeCPdfMiniBar()" title="Comment">💬 Comment</button>
+    <button onclick="cpdfApplyAnnot('${cardId}','link','');removeCPdfMiniBar()" title="Link to canvas resource">🔗 Link</button>`;
+  document.body.appendChild(bar);
+  setTimeout(() => document.addEventListener('mousedown', removeCPdfMiniBarOnOut, {once:true}), 50);
+}
+function removeCPdfMiniBar() { document.getElementById('cpdf-minibar')?.remove(); }
+function removeCPdfMiniBarOnOut(e) { if (!e.target.closest('#cpdf-minibar')) removeCPdfMiniBar(); }
+
+function cpdfPromptComment(cardId) {
+  const pen = _cpdfPending[cardId]; if (!pen) return;
+  showCardCommentPopover(cardId, pen.text, (txt) => {
+    cpdfApplyAnnot(cardId, 'comment', txt);
+  });
+  window.getSelection()?.removeAllRanges();
+}
+
+function cpdfApplyAnnot(cardId, type, comment) {
+  const pen   = _cpdfPending[cardId]; if (!pen) return;
+  const state = _cpdfState[cardId];   if (!state) return;
+  const id    = ++state.annotCounter;
+  const annotId = `cpdf-${cardId}-a${id}`;
+
+  // Draw highlight marks on the overlay
+  const { normRects, vp, wrap, annotOverlay } = pen;
+  const colors = { highlight:'rgba(255,220,0,0.45)', comment:'rgba(26,143,111,0.2)', link:'rgba(37,99,235,0.18)' };
+  const borders= { highlight:'rgba(212,133,10,0.8)',  comment:'rgba(26,143,111,0.7)',  link:'rgba(37,99,235,0.9)' };
+
+  normRects.forEach((nr, ri) => {
+    const mark = document.createElement('div');
+    mark.className = 'cpdf-mark cpdf-mark-' + type;
+    mark.style.cssText = `position:absolute;pointer-events:auto;cursor:pointer;` +
+      `left:${nr.x*vp.width}px;top:${nr.y*vp.height}px;` +
+      `width:${nr.w*vp.width}px;height:${nr.h*vp.height}px;` +
+      `background:${colors[type]||'rgba(0,0,0,0.1)'};` +
+      `border-bottom:2px solid ${borders[type]||'#888'};` +
+      `mix-blend-mode:multiply;border-radius:1px;`;
+    mark.dataset.annotId = annotId;
+    if (ri === 0) {
+      mark.id = annotId + '-mark';
+      if (type === 'comment' && comment) {
+        const bubble = document.createElement('div');
+        bubble.className = 'cpdf-bubble';
+        bubble.textContent = '💬';
+        bubble.title = comment;
+        bubble.onclick = (e) => { e.stopPropagation(); showInlineAnnotNote(annotId, pen.text, comment, cardId); };
+        mark.style.pointerEvents = 'auto';
+        mark.appendChild(bubble);
+      }
+      if (type === 'link') {
+        const dot = document.createElement('div');
+        dot.className = 'cpdf-link-dot';
+        dot.onclick = (e) => { e.stopPropagation(); cpdfStartLink(cardId, annotId, pen.text); };
+        mark.appendChild(dot);
+        mark.onclick = () => cpdfStartLink(cardId, annotId, pen.text);
+      }
+      if (type === 'highlight') {
+        mark.onclick = () => showCPdfAnnotMenu(cardId, annotId, pen.text, mark);
+      }
+    }
+    annotOverlay.appendChild(mark);
+  });
+
+  // Add to annotation list panel
+  addToAnnotPanel(cardId, annotId, type, pen.text, comment);
+
+  if (type === 'link') cpdfStartLink(cardId, annotId, pen.text);
+  delete _cpdfPending[cardId];
+  window.getSelection()?.removeAllRanges();
+}
+
+function cpdfStartLink(cardId, annotId, text) {
+  const markEl = document.getElementById(annotId + '-mark');
+  const anchor = {
+    type: 'sentence', fileId: _cards[cardId]?.fileEntry?.id || cardId,
+    anchorId: annotId, text, label: truncate(text, 60),
+    annotId, fromCard: cardId
+  };
+  startLinkFromAnchor(anchor, markEl);
+  showToast('🔗 Click any canvas card to link this text', '#2563EB');
+}
+
+function showCPdfAnnotMenu(cardId, annotId, text, markEl) {
+  const existing = document.getElementById('cpdf-annot-ctx');
+  if (existing) { existing.remove(); return; }
+  const r = markEl.getBoundingClientRect();
+  const menu = document.createElement('div');
+  menu.id = 'cpdf-annot-ctx';
+  menu.className = 'cpdf-annot-ctx';
+  menu.style.cssText = `left:${r.left}px;top:${r.bottom+4}px`;
+  menu.innerHTML = `
+    <div class="cpdf-ctx-item" onclick="cpdfStartLink('${cardId}','${annotId}','${escAttr(text.slice(0,80))}');document.getElementById('cpdf-annot-ctx')?.remove()">🔗 Link to canvas resource</div>
+    <div class="cpdf-ctx-item" onclick="cpdfPromptCommentOnAnnot('${cardId}','${annotId}','${escAttr(text.slice(0,80))}');document.getElementById('cpdf-annot-ctx')?.remove()">💬 Add comment</div>
+    <div class="cpdf-ctx-item danger" onclick="removeAnnot('${cardId}','${annotId}');document.getElementById('cpdf-annot-ctx')?.remove()">🗑 Remove</div>`;
+  document.body.appendChild(menu);
+  setTimeout(() => document.addEventListener('mousedown', e => { if(!e.target.closest('#cpdf-annot-ctx')) menu.remove(); }, {once:true}), 40);
+}
+
+function cpdfPromptCommentOnAnnot(cardId, annotId, text) {
+  _cpdfPending[cardId] = { text, normRects:[], annotOverlay:null, vp:null, wrap:null };
+  showCardCommentPopover(cardId, text, (txt) => {
+    const entry = { type:'comment', text, comment:txt };
+    addToAnnotPanel(cardId, annotId+'-c', 'comment', text, txt);
+    showToast('💬 Comment added','#1A8F6F');
+    delete _cpdfPending[cardId];
+  });
+}
 
 // ─── Video embed ──────────────────────────────────────────────────────────
 function embedVideoCard(body, entry, cardId) {
-  body.style.cssText = 'background:#000;display:flex;flex-direction:column';
+  body.style.cssText = 'background:#000;display:flex;flex-direction:column;overflow:hidden';
+
   const vid = document.createElement('video');
   vid.id = 'cvid-' + cardId;
   vid.src = entry.path;
   vid.controls = true;
   vid.style.cssText = 'width:100%;flex:1;min-height:0;object-fit:contain;display:block;background:#000';
   body.appendChild(vid);
+
   const bar = document.createElement('div');
   bar.className = 'cvid-bar';
-  bar.innerHTML = `<button class="cvid-ts-btn" onclick="linkCardTimestamp('${cardId}')">📍 Link this timestamp</button>`;
+  bar.innerHTML = `
+    <button class="cvid-ts-btn" onclick="linkCardTimestamp('${cardId}')">📍 Link timestamp</button>
+    <button class="cvid-ts-btn" onclick="vidAddComment('${cardId}')">💬 Comment</button>`;
   body.appendChild(bar);
+
+  // Annotation panel
+  const ap = document.createElement('div');
+  ap.id = 'cpdf-annotpanel-' + cardId;
+  ap.className = 'ccard-annot-panel';
+  ap.innerHTML = '<div class="ccard-annot-label">Timestamp notes <span id="cpdf-annotcount-'+cardId+'">0</span></div><div class="ccard-annot-list" id="cpdf-annotlist-'+cardId+'"></div>';
+  body.appendChild(ap);
 }
 
 function linkCardTimestamp(cardId) {
@@ -325,29 +547,73 @@ function linkCardTimestamp(cardId) {
   const vid  = document.getElementById('cvid-' + cardId); if (!vid) return;
   const t = vid.currentTime;
   const anchor = {
-    type: 'timestamp', fileId: card.fileEntry.id,
-    anchorId: `${card.fileEntry.id}-t${Math.floor(t)}`,
-    time: t,
-    label: `${card.fileEntry.name} @ ${fmtTime(t)}`,
-    text:  `Video timestamp ${fmtTime(t)}`,
-    sourceCardId: cardId,  // remember which canvas card this came from
+    type:'timestamp', fileId:card.fileEntry.id,
+    anchorId:`${card.fileEntry.id}-t${Math.floor(t)}`,
+    time:t,
+    label:`${card.fileEntry.name} @ ${fmtTime(t)}`,
+    text:`Video timestamp ${fmtTime(t)}`,
+    sourceCardId:cardId,
   };
   startLinkFromAnchor(anchor, vid);
 }
 
+function vidAddComment(cardId) {
+  const card = _cards[cardId]; if (!card) return;
+  const vid  = document.getElementById('cvid-' + cardId); if (!vid) return;
+  const t    = vid.currentTime;
+  const text = `@ ${fmtTime(t)}`;
+  showCardCommentPopover(cardId, text, (comment) => {
+    const annotId = `cvid-${cardId}-a${Date.now()}`;
+    addToAnnotPanel(cardId, annotId, 'comment', text, comment);
+    showToast('💬 Comment added at ' + text,'#1A8F6F');
+  });
+}
+
 // ─── Notebook embed ───────────────────────────────────────────────────────
 function embedNotebookCard(body, entry, cardId) {
-  body.style.cssText = 'overflow:auto;background:#FAFAF8';
+  body.style.cssText = 'overflow:hidden;background:#FAFAF8;display:flex;flex-direction:column';
+
+  // Toolbar
+  const ntb = document.createElement('div');
+  ntb.className = 'cnb-toolbar';
+  ntb.innerHTML = `<span style="font-family:var(--fm);font-size:10px;color:var(--g400)">Click line:</span>
+    <button class="cnb-tool-btn active" id="cnbtool-link-${cardId}"    onclick="setCNbTool('${cardId}','link')"    title="Link line">🔗 Link</button>
+    <button class="cnb-tool-btn"        id="cnbtool-comment-${cardId}" onclick="setCNbTool('${cardId}','comment')" title="Comment">💬 Comment</button>
+    <button class="cnb-tool-btn"        id="cnbtool-hl-${cardId}"      onclick="setCNbTool('${cardId}','hl')"      title="Highlight">🖊 Highlight</button>`;
+  body.appendChild(ntb);
+
   const inner = document.createElement('div');
-  inner.style.padding = '8px';
+  inner.style.cssText = 'padding:8px;flex:1;overflow:auto;min-height:0';
   inner.id = 'cnb-inner-' + cardId;
   body.appendChild(inner);
-  fetch(entry.path).then(r => r.text()).then(text => {
+
+  // Annotation panel
+  const ap = document.createElement('div');
+  ap.id = 'cpdf-annotpanel-' + cardId;
+  ap.className = 'ccard-annot-panel';
+  ap.innerHTML = '<div class="ccard-annot-label">Line annotations <span id="cpdf-annotcount-'+cardId+'">0</span></div><div class="ccard-annot-list" id="cpdf-annotlist-'+cardId+'"></div>';
+  body.appendChild(ap);
+
+  // Store tool state
+  if (!_cnbState) window._cnbState = {};
+  _cnbState[cardId] = { tool: 'link' };
+
+  fetch(entry.path).then(r=>r.text()).then(text => {
     const ext = entry.name.split('.').pop().toLowerCase();
-    if (ext === 'ipynb') {
+    if (ext==='ipynb') {
       try { renderNbInCard(JSON.parse(text), inner, entry.id, cardId); }
       catch { renderRawInCard(text, inner, entry.id, cardId, ext); }
     } else { renderRawInCard(text, inner, entry.id, cardId, ext); }
+  });
+}
+
+const _cnbState = {};
+function setCNbTool(cardId, tool) {
+  _cnbState[cardId] = _cnbState[cardId] || {};
+  _cnbState[cardId].tool = tool;
+  ['link','comment','hl'].forEach(t => {
+    const btn = document.getElementById(`cnbtool-${t}-${cardId}`);
+    if (btn) btn.classList.toggle('active', t===tool);
   });
 }
 
@@ -390,17 +656,41 @@ function renderRawInCard(text, container, fileId, cardId, ext) {
 }
 
 function onCanvasCodeLineClick(el, cardId) {
-  el.classList.add('cnb-linked');
-  const anchor = {
-    type: 'codeline', fileId: el.dataset.fileId,
-    anchorId: el.dataset.anchorId,
-    cell: el.dataset.cell, line: el.dataset.line,
-    text: el.dataset.text,
-    label: `Line ${parseInt(el.dataset.line)+1}: ${truncate(el.dataset.text, 50)}`,
-    sourceCardId: cardId,
-    sourceElId: 'cnbl-' + el.dataset.anchorId,
-  };
-  startLinkFromAnchor(anchor, el);
+  const tool = (_cnbState[cardId]?.tool) || 'link';
+  const text  = el.dataset.text || '';
+  const lineLabel = `Line ${parseInt(el.dataset.line)+1}: ${truncate(text, 50)}`;
+
+  if (tool === 'link') {
+    el.classList.add('cnb-linked');
+    const anchor = {
+      type:'codeline', fileId:el.dataset.fileId,
+      anchorId:el.dataset.anchorId,
+      cell:el.dataset.cell, line:el.dataset.line,
+      text, label:lineLabel,
+      sourceCardId:cardId, sourceElId:'cnbl-'+el.dataset.anchorId,
+    };
+    startLinkFromAnchor(anchor, el);
+
+  } else if (tool === 'comment') {
+    showCardCommentPopover(cardId, lineLabel, (comment) => {
+      el.classList.add('cnb-commented');
+      const bubble = document.createElement('span');
+      bubble.className = 'cnb-comment-bubble';
+      bubble.textContent = '💬';
+      bubble.title = comment;
+      bubble.onclick = (e) => { e.stopPropagation(); showInlineAnnotNote('cnb-'+cardId+'-l'+el.dataset.line, text, comment, cardId); };
+      el.appendChild(bubble);
+      const annotId = `cnb-${cardId}-l${el.dataset.line}`;
+      addToAnnotPanel(cardId, annotId, 'comment', lineLabel, comment);
+      showToast('💬 Comment added','#1A8F6F');
+    });
+
+  } else if (tool === 'hl') {
+    el.classList.add('cnb-hl');
+    const annotId = `cnb-hl-${cardId}-l${el.dataset.line}`;
+    addToAnnotPanel(cardId, annotId, 'highlight', lineLabel, '');
+    showToast('🖊 Line highlighted','#D97706');
+  }
 }
 
 // ─── Sticky card ──────────────────────────────────────────────────────────
@@ -545,14 +835,20 @@ function doDragCard(e) {
   if (!_dragCard) return;
   const surface = document.getElementById('canvas-surface');
   const sRect   = surface.getBoundingClientRect();
-  // Convert mouse position to world coords, accounting for the drag offset
   const wx = (e.clientX - sRect.left - _panX) / _zoom - _dragOffX / _zoom;
   const wy = (e.clientY - sRect.top  - _panY) / _zoom - _dragOffY / _zoom;
+  const cid = _dragCard.id;
+  // Compute screen-space delta for stroke grouping
+  const prevRect = _dragCard.getBoundingClientRect();
   _dragCard.style.left = Math.max(0, wx) + 'px';
   _dragCard.style.top  = Math.max(0, wy) + 'px';
-  const cid = _dragCard.id;
   if (_cards[cid]) { _cards[cid].wx = wx; _cards[cid].wy = wy; }
-  redrawLinks();
+  // Move grouped draw strokes with the card
+  const newRect = _dragCard.getBoundingClientRect();
+  const sdx = newRect.left - prevRect.left;
+  const sdy = newRect.top  - prevRect.top;
+  if (typeof moveStrokesWithCard === 'function') moveStrokesWithCard(cid, sdx, sdy);
+  if (typeof redrawLinks === 'function') redrawLinks();
 }
 
 // ─── Resize ───────────────────────────────────────────────────────────────
@@ -658,3 +954,137 @@ function mdToHtml(md) {
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>')
     .replace(/`(.+?)`/g,'<code>$1</code>').replace(/\n/g,'<br>');
 }
+
+// ═══════════════════════════════════════════════════════════════════
+// SHARED ANNOTATION HELPERS (for PDF / Video / Notebook cards)
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Comment popover ──────────────────────────────────────────────────────────
+let _commentCallback = null;
+
+function showCardCommentPopover(cardId, refText, onSave) {
+  removeCardCommentPopover();
+  _commentCallback = onSave;
+  const pop = document.createElement('div');
+  pop.id = 'card-comment-popover';
+  pop.className = 'card-comment-popover';
+  // Position near card
+  const card = _cards[cardId];
+  let left = 200, top = 200;
+  if (card) {
+    const r = card.el.getBoundingClientRect();
+    left = Math.min(r.right + 8, window.innerWidth - 310);
+    top  = r.top + 20;
+  }
+  pop.style.cssText = `left:${left}px;top:${top}px`;
+  pop.innerHTML = `
+    <div class="ccp-header">💬 Add comment</div>
+    <div class="ccp-ref">"${escHtml(truncate(refText, 60))}"</div>
+    <textarea class="ccp-input" id="ccp-input" placeholder="Type your comment…" rows="3" autofocus></textarea>
+    <div class="ccp-actions">
+      <button class="ccp-btn secondary" onclick="removeCardCommentPopover()">Cancel</button>
+      <button class="ccp-btn primary"   onclick="saveCardComment()">Add</button>
+    </div>`;
+  document.body.appendChild(pop);
+  setTimeout(() => {
+    const inp = document.getElementById('ccp-input');
+    if (inp) inp.focus();
+  }, 30);
+}
+
+function removeCardCommentPopover() {
+  document.getElementById('card-comment-popover')?.remove();
+  _commentCallback = null;
+}
+
+function saveCardComment() {
+  const txt = (document.getElementById('ccp-input')?.value || '').trim();
+  removeCardCommentPopover();
+  if (_commentCallback) { _commentCallback(txt || '(no text)'); _commentCallback = null; }
+}
+
+// ── Annotation panel (collapsible list per card) ─────────────────────────────
+const _cardAnnotStore = {}; // cardId -> [{ id, type, text, comment }]
+
+function addToAnnotPanel(cardId, annotId, type, text, comment) {
+  if (!_cardAnnotStore[cardId]) _cardAnnotStore[cardId] = [];
+  _cardAnnotStore[cardId].push({ id:annotId, type, text, comment });
+
+  const list = document.getElementById('cpdf-annotlist-' + cardId);
+  if (!list) return;
+
+  const row = document.createElement('div');
+  row.className = 'ccard-annot-row';
+  row.id = 'cannotr-' + annotId;
+
+  const typeColors = { highlight:'#D97706', comment:'#1A8F6F', link:'#2563EB' };
+  const typeIcons  = { highlight:'🖊', comment:'💬', link:'🔗' };
+  row.innerHTML = `
+    <div class="ccard-annot-strip" style="background:${typeColors[type]||'#888'}"></div>
+    <div class="ccard-annot-body">
+      <div class="ccard-annot-type" style="color:${typeColors[type]||'#888'}">${typeIcons[type]||'•'} ${type}</div>
+      <div class="ccard-annot-text">"${escHtml(truncate(text,44))}"</div>
+      ${comment ? `<div class="ccard-annot-comment">${escHtml(comment)}</div>` : ''}
+    </div>
+    <div class="ccard-annot-acts">
+      ${type==='link'?`<button class="ccard-annot-btn" title="Jump to linked card" onclick="findAndJumpToLinkedCard('${annotId}')">→</button>`:''}
+      <button class="ccard-annot-btn del" title="Remove" onclick="removeAnnot('${cardId}','${annotId}')">✕</button>
+    </div>`;
+  list.appendChild(row);
+
+  // Update count badge
+  const cnt = document.getElementById('cpdf-annotcount-' + cardId);
+  if (cnt) cnt.textContent = (parseInt(cnt.textContent)||0) + 1;
+
+  // Make panel visible
+  const panel = document.getElementById('cpdf-annotpanel-' + cardId);
+  if (panel) panel.classList.add('has-annots');
+}
+
+function removeAnnot(cardId, annotId) {
+  // Remove visual marks
+  document.querySelectorAll(`[data-annot-id="${annotId}"],[id="${annotId}-mark"]`).forEach(el => el.remove());
+  document.getElementById('cannotr-' + annotId)?.remove();
+  // Update count
+  const cnt = document.getElementById('cpdf-annotcount-' + cardId);
+  if (cnt) cnt.textContent = Math.max(0, (parseInt(cnt.textContent)||1) - 1);
+  if (_cardAnnotStore[cardId])
+    _cardAnnotStore[cardId] = _cardAnnotStore[cardId].filter(a => a.id !== annotId);
+}
+
+function findAndJumpToLinkedCard(annotId) {
+  const link = Object.values(LINKS).find(l => l.anchor?.annotId === annotId || l.anchor?.anchorId === annotId);
+  if (link) jumpToCard(link.cardId);
+  else showToast('No canvas link found for this annotation','#D4850A');
+}
+
+// ── Inline note popup (click on 💬 bubble) ───────────────────────────────────
+function showInlineAnnotNote(annotId, text, comment, cardId) {
+  document.getElementById('inline-note-pop')?.remove();
+  const pop = document.createElement('div');
+  pop.id = 'inline-note-pop';
+  pop.className = 'inline-note-pop';
+  const mark = document.getElementById(annotId + '-mark');
+  let left = 200, top = 200;
+  if (mark) {
+    const r = mark.getBoundingClientRect();
+    left = Math.min(r.right + 6, window.innerWidth - 240);
+    top  = r.top;
+  }
+  pop.style.cssText = `left:${left}px;top:${top}px`;
+  pop.innerHTML = `
+    <div class="inp-header">💬 Comment</div>
+    <div class="inp-text">${escHtml(comment)}</div>
+    <div class="inp-ref">"${escHtml(truncate(text,60))}"</div>
+    <div class="inp-actions">
+      <button class="ccp-btn secondary" onclick="cpdfStartLink('${cardId}','${annotId}','${escAttr(text.slice(0,80))}');document.getElementById('inline-note-pop')?.remove()">🔗 Link</button>
+      <button class="ccp-btn secondary" onclick="removeAnnot('${cardId}','${annotId}');document.getElementById('inline-note-pop')?.remove()">🗑</button>
+      <button class="ccp-btn primary"   onclick="document.getElementById('inline-note-pop')?.remove()">Close</button>
+    </div>`;
+  document.body.appendChild(pop);
+  setTimeout(() => document.addEventListener('mousedown', e => {
+    if (!e.target.closest('#inline-note-pop')) pop.remove();
+  }, {once:true}), 40);
+}
+
+// ═══════════════════════════════════════════════════════════════════

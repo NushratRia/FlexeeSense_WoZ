@@ -122,6 +122,8 @@ async function renderAllPages() {
 
   // Re-draw all existing annotations at the new scale
   reApplyAllAnnotations();
+  // Connectors source from annotation marks — redraw after positions change
+  requestAnimationFrame(() => { if (typeof redrawLinks === 'function') redrawLinks(); });
 }
 
 // ─── Zoom ──────────────────────────────────────────────────────────────────
@@ -143,10 +145,18 @@ async function pdfZoom(delta) {
 // ─── Re-apply all annotations at current scale ────────────────────────────
 function reApplyAllAnnotations() {
   Object.values(PDF_ANNOTS).forEach(annot => {
-    // Remove old marks
     document.querySelectorAll(`[data-annot-id="${annot.id}"]`).forEach(el => el.remove());
-    // Recompute pixel rects from normalized coords at current scale
     renderAnnotationFromNorm(annot);
+  });
+  // After marks re-rendered: update connectors and move grouped draw strokes
+  requestAnimationFrame(() => {
+    if (typeof redrawLinks === 'function') redrawLinks();
+    if (typeof moveStrokesWithAnnot === 'function') {
+      Object.values(PDF_ANNOTS).forEach(annot => {
+        const markEl = document.getElementById('annot-' + annot.id + '-mark');
+        if (markEl) moveStrokesWithAnnot(annot.id, markEl);
+      });
+    }
   });
 }
 
@@ -174,6 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
         _currentPage = best;
         document.getElementById('pdf-cur-page').textContent = best;
       }
+      // Connectors track annotation mark screen positions on scroll
+      if (typeof redrawLinks === 'function') redrawLinks();
     });
   }
 });

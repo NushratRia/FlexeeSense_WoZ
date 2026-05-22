@@ -162,12 +162,12 @@ body {
   overflow: hidden;
   min-width: 0;
   min-height: 0;
-  transition: flex 0.04s;
+  /* no flex transition — causes white flash during resize */
 }
 
 .viewer-panel {
-  flex: 0 0 480px;
-  min-width: 0;
+  flex: 0 0 50vw;   /* initial: half screen; user adjusts via splitter */
+  min-width: 120px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -603,8 +603,11 @@ body {
   width: 5px;
   cursor: col-resize;
   background: var(--border);
+  flex-shrink: 0;
 }
 .splitter-v:hover, .splitter-v.dragging { background: var(--coral); }
+/* Prevent any child from showing during resize */
+.splitter-v * { pointer-events: none; }
 .splitter-v::after {
   content: '';
   position: absolute;
@@ -1806,3 +1809,462 @@ body {
   pointer-events: none;
   user-select: none;
 }
+
+/* ── Link color legend ── */
+.link-legend {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.legend-item {
+  font-family: var(--fm);
+  font-size: 10px;
+  color: var(--lc);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+/* ── Sentence link badge uses color passed from JS ── */
+.sentence-link-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--fm);
+  font-size: 9px;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-left: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.sentence-link-badge:hover { opacity: 0.8; }
+
+/* ── No user-select during any drag ── */
+body.resizing * { user-select: none !important; }
+
+/* ═══════════════════════════════════════════════
+   LINKS PANEL (collapsible drawer)
+═══════════════════════════════════════════════ */
+.links-panel {
+  position: fixed;
+  top: 50px;        /* below topbar */
+  right: 0;
+  width: 320px;
+  max-height: calc(100vh - 70px);
+  background: var(--white);
+  border-left: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0 0 0 var(--radius);
+  box-shadow: -4px 4px 24px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  transform: translateX(100%);
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+}
+.links-panel.open {
+  transform: translateX(0);
+  pointer-events: all;
+}
+.lp-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--paper-2);
+  border-radius: 0 0 0 var(--radius);
+  flex-shrink: 0;
+}
+.lp-title { font-family:var(--fd); font-weight:800; font-size:13px; flex:1; }
+.lp-count {
+  font-family: var(--fm); font-size:11px;
+  background: var(--ink); color:#fff;
+  padding: 2px 7px; border-radius:10px; min-width:20px; text-align:center;
+}
+.lp-close {
+  background:none; border:1px solid var(--border); border-radius:5px;
+  width:24px; height:24px; cursor:pointer; font-size:13px; color:var(--ink-3);
+  display:flex; align-items:center; justify-content:center; transition:all .12s;
+}
+.lp-close:hover { background:var(--coral-l); color:var(--coral); border-color:var(--coral); }
+.lp-body {
+  flex:1; overflow-y:auto; padding:8px;
+  display:flex; flex-direction:column; gap:6px;
+}
+.lp-empty {
+  padding: 20px 14px; text-align:center;
+  font-family:var(--fm); font-size:11px; color:var(--ink-4);
+  line-height:1.6;
+}
+.lp-row {
+  display: flex; align-items: stretch; gap: 0;
+  border: 1px solid var(--border); border-radius: var(--rs);
+  overflow: hidden; transition: box-shadow .12s;
+}
+.lp-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.lp-row-color { width:4px; flex-shrink:0; }
+.lp-row-body {
+  flex:1; padding:8px 10px; min-width:0;
+}
+.lp-row-type {
+  font-family:var(--fm); font-size:9px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.06em; margin-bottom:2px;
+}
+.lp-row-src {
+  font-size:11px; color:var(--ink-2); line-height:1.4;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  font-style:italic; margin-bottom:2px;
+}
+.lp-row-target {
+  font-family:var(--fm); font-size:10px; color:var(--ink-4);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.lp-row-actions {
+  display:flex; align-items:center;
+  padding: 0 6px; gap:3px; background:var(--paper); flex-shrink:0;
+}
+.lp-act-btn {
+  width:24px; height:24px; border-radius:4px;
+  border:1px solid var(--border); background:transparent;
+  cursor:pointer; font-size:12px; color:var(--ink-3);
+  display:flex; align-items:center; justify-content:center; transition:all .1s;
+}
+.lp-act-btn:hover { background:var(--paper-2); color:var(--ink); }
+.lp-act-btn.lp-del:hover { background:var(--coral-l); color:var(--coral); border-color:var(--coral); }
+.lp-footer {
+  padding: 8px 10px;
+  border-top: 1px solid var(--border);
+  background: var(--paper-2); flex-shrink:0;
+}
+.lp-clear-btn {
+  width:100%; padding:6px 10px;
+  border:1px solid var(--border); border-radius:var(--rs);
+  background:transparent; color:var(--coral); font-family:var(--fd);
+  font-weight:700; font-size:11px; cursor:pointer; transition:all .12s;
+}
+.lp-clear-btn:hover { background:var(--coral-l); border-color:var(--coral); }
+
+/* links-count badge on toolbar button */
+.links-badge {
+  display:inline-flex; align-items:center; justify-content:center;
+  background:var(--ink); color:#fff;
+  font-family:var(--fm); font-size:9px; font-weight:700;
+  min-width:16px; height:16px; border-radius:8px; padding:0 4px;
+  margin-left:4px; vertical-align:middle;
+}
+
+/* ═══════════════════════════════════════════════
+   CANVAS CARD ANNOTATION SYSTEM
+═══════════════════════════════════════════════ */
+
+/* ── PDF card text layer ── */
+.cpdf-text-layer span {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+  line-height: 1;
+}
+.cpdf-text-layer ::selection { background: rgba(37,99,235,0.25); }
+
+/* ── PDF annotation marks on card canvas ── */
+.cpdf-mark { position:absolute; transition:opacity .12s; }
+.cpdf-mark:hover { opacity:.75; }
+.cpdf-mark-highlight { cursor:pointer; }
+.cpdf-mark-comment   { cursor:default; }
+.cpdf-mark-link      { cursor:pointer; }
+
+.cpdf-bubble {
+  position:absolute; top:-18px; right:-4px;
+  font-size:13px; cursor:pointer;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+  transition: transform .1s;
+}
+.cpdf-bubble:hover { transform:scale(1.2); }
+
+.cpdf-link-dot {
+  position:absolute; top:-10px; right:-2px;
+  width:10px; height:10px; border-radius:50%;
+  background:var(--blue); border:2px solid #fff;
+  cursor:pointer; box-shadow:0 1px 4px rgba(37,99,235,.5);
+  transition:transform .1s;
+}
+.cpdf-link-dot:hover { transform:scale(1.3); }
+
+/* ── PDF card toolbar ── */
+.cpdf-toolbar {
+  display:flex; align-items:center; gap:4px;
+  padding:5px 8px; background:var(--g900);
+  flex-shrink:0; flex-wrap:wrap;
+}
+.cpdf-nav,.cpdf-zoom {
+  width:22px; height:22px; border-radius:4px;
+  border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.07);
+  color:rgba(255,255,255,.8); cursor:pointer; font-size:13px;
+  display:flex; align-items:center; justify-content:center; transition:all .1s;
+}
+.cpdf-nav:hover,.cpdf-zoom:hover { background:rgba(255,255,255,.15); }
+.cpdf-info { font-family:var(--fm); font-size:10px; color:rgba(255,255,255,.5); min-width:40px; text-align:center; }
+.cpdf-sep  { width:1px; height:16px; background:rgba(255,255,255,.12); margin:0 2px; }
+
+.cpdf-annot-btn {
+  padding:3px 7px; border-radius:4px;
+  border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05);
+  color:rgba(255,255,255,.65); cursor:pointer; font-family:var(--fm);
+  font-size:10px; transition:all .12s;
+}
+.cpdf-annot-btn:hover { background:rgba(255,255,255,.12); color:#fff; }
+.cpdf-annot-btn.active { background:rgba(255,255,255,.18); color:#fff; border-color:rgba(255,255,255,.4); }
+
+/* ── Mini annotation toolbar (floating after selection) ── */
+.cpdf-minibar {
+  position:fixed; z-index:800;
+  background:var(--g900); border-radius:8px;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  display:flex; overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+}
+.cpdf-minibar button {
+  padding:7px 12px; background:transparent; border:none;
+  color:rgba(255,255,255,.85); font-family:var(--fd); font-weight:700;
+  font-size:11px; cursor:pointer; transition:background .1s; white-space:nowrap;
+}
+.cpdf-minibar button:hover { background:rgba(255,255,255,.1); }
+.cpdf-minibar button + button { border-left:1px solid rgba(255,255,255,.1); }
+
+/* ── PDF annotation context menu ── */
+.cpdf-annot-ctx {
+  position:fixed; z-index:800;
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--r); box-shadow:var(--shadow-lg);
+  overflow:hidden; min-width:190px;
+}
+.cpdf-ctx-item {
+  padding:9px 14px; font-family:var(--fd); font-weight:600; font-size:12px;
+  color:var(--g900); cursor:pointer; transition:background .1s;
+  display:flex; align-items:center; gap:7px;
+}
+.cpdf-ctx-item:hover { background:var(--g50); }
+.cpdf-ctx-item.danger { color:var(--coral); }
+.cpdf-ctx-item.danger:hover { background:var(--coral-l); }
+
+/* ── Video card action bar ── */
+.cvid-bar {
+  background:var(--g900); padding:6px 10px;
+  display:flex; gap:6px; flex-shrink:0;
+}
+.cvid-ts-btn {
+  font-family:var(--fm); font-size:10px;
+  padding:4px 10px; border-radius:5px;
+  border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.8); cursor:pointer; transition:all .12s;
+}
+.cvid-ts-btn:hover { background:rgba(255,255,255,.15); color:#fff; }
+
+/* ── Notebook toolbar ── */
+.cnb-toolbar {
+  display:flex; align-items:center; gap:5px; padding:5px 8px;
+  background:var(--g50); border-bottom:1px solid var(--border); flex-shrink:0;
+}
+.cnb-tool-btn {
+  font-family:var(--fm); font-size:10px; padding:3px 8px;
+  border-radius:4px; border:1px solid var(--border);
+  background:var(--white); color:var(--g600); cursor:pointer; transition:all .12s;
+}
+.cnb-tool-btn:hover { background:var(--g100); }
+.cnb-tool-btn.active { background:var(--g900); color:#fff; border-color:var(--g900); }
+
+/* Notebook highlighted / commented lines */
+.cnb-line.cnb-hl   { background:rgba(255,220,0,.2); border-left:3px solid #D97706; }
+.cnb-line.cnb-commented { background:rgba(26,143,111,.08); border-left:3px solid #1A8F6F; }
+.cnb-comment-bubble {
+  font-size:12px; cursor:pointer; margin-left:6px;
+  transition:transform .1s; display:inline-block;
+}
+.cnb-comment-bubble:hover { transform:scale(1.2); }
+
+/* ── Shared annotation panel (collapsible strip at bottom of card) ── */
+.ccard-annot-panel {
+  border-top:1px solid var(--border);
+  background:var(--g50); flex-shrink:0;
+  max-height:0; overflow:hidden;
+  transition:max-height .2s ease;
+}
+.ccard-annot-panel.has-annots { max-height:160px; }
+.ccard-annot-label {
+  font-family:var(--fm); font-size:9px; text-transform:uppercase;
+  letter-spacing:.07em; color:var(--g400);
+  padding:5px 10px 3px;
+  display:flex; align-items:center; gap:5px;
+}
+.ccard-annot-label span {
+  background:var(--g200); color:var(--g900);
+  font-weight:600; padding:1px 5px; border-radius:3px;
+}
+.ccard-annot-list { overflow-y:auto; max-height:120px; }
+
+.ccard-annot-row {
+  display:flex; align-items:stretch; gap:0;
+  border-top:1px solid var(--border);
+  transition:background .1s;
+}
+.ccard-annot-row:hover { background:var(--g100); }
+.ccard-annot-strip { width:3px; flex-shrink:0; }
+.ccard-annot-body  { flex:1; padding:5px 8px; min-width:0; }
+.ccard-annot-type  { font-family:var(--fm); font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:1px; }
+.ccard-annot-text  { font-size:10px; color:var(--g600); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-style:italic; }
+.ccard-annot-comment { font-size:10px; color:var(--g900); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ccard-annot-acts  { display:flex; align-items:center; padding:0 5px; gap:2px; flex-shrink:0; }
+.ccard-annot-btn   { width:20px; height:20px; border-radius:3px; border:1px solid var(--border); background:transparent; cursor:pointer; font-size:10px; color:var(--g400); display:flex; align-items:center; justify-content:center; transition:all .1s; }
+.ccard-annot-btn:hover { background:var(--g100); color:var(--g900); }
+.ccard-annot-btn.del:hover { background:var(--coral-l); color:var(--coral); border-color:var(--coral); }
+
+/* ── Card comment popover ── */
+.card-comment-popover {
+  position:fixed; z-index:850; width:280px;
+  background:var(--white); border-radius:var(--r);
+  box-shadow:var(--shadow-lg); border:1px solid var(--border);
+  overflow:hidden;
+}
+.ccp-header { padding:9px 12px 6px; font-family:var(--fd); font-weight:800; font-size:12px; background:var(--g50); border-bottom:1px solid var(--border); }
+.ccp-ref    { padding:5px 12px; font-size:11px; color:var(--g400); font-style:italic; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-bottom:1px solid var(--border); }
+.ccp-input  { width:100%; padding:9px 12px; border:none; outline:none; font-family:var(--fb); font-size:12px; color:var(--g900); resize:vertical; min-height:70px; border-bottom:1px solid var(--border); display:block; }
+.ccp-actions { display:flex; gap:6px; padding:7px 10px; justify-content:flex-end; background:var(--g50); }
+.ccp-btn { padding:5px 12px; border-radius:5px; font-family:var(--fd); font-weight:700; font-size:11px; cursor:pointer; transition:all .12s; border:1px solid var(--border); }
+.ccp-btn.primary   { background:var(--g900); color:#fff; border-color:var(--g900); }
+.ccp-btn.primary:hover { background:var(--coral); border-color:var(--coral); }
+.ccp-btn.secondary { background:transparent; color:var(--g600); }
+.ccp-btn.secondary:hover { background:var(--g100); }
+
+/* ── Inline note popup (click on 💬 bubble) ── */
+.inline-note-pop {
+  position:fixed; z-index:850; width:230px;
+  background:var(--white); border-radius:var(--r);
+  box-shadow:var(--shadow-lg); border:1px solid var(--border); overflow:hidden;
+}
+.inp-header { padding:8px 12px 4px; font-family:var(--fd); font-weight:800; font-size:12px; background:var(--teal-l); border-bottom:1px solid var(--border); }
+.inp-text   { padding:7px 12px; font-size:12px; color:var(--g900); line-height:1.5; }
+.inp-ref    { padding:0 12px 7px; font-size:10px; color:var(--g400); font-style:italic; border-bottom:1px solid var(--border); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.inp-actions { display:flex; gap:5px; padding:7px 10px; background:var(--g50); }
+
+/* ═══════════════════════════════════════════════
+   DRAW TOOL
+═══════════════════════════════════════════════ */
+.draw-toolbar {
+  background: var(--g900);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+  display: none;
+  animation: slideDown .15s ease;
+}
+@keyframes slideDown { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+
+.draw-toolbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  flex-wrap: wrap;
+}
+
+/* Exit button */
+.draw-exit-btn {
+  font-family: var(--fd);
+  font-weight: 800;
+  font-size: 11px;
+  padding: 4px 11px;
+  border-radius: 5px;
+  border: 1px solid rgba(224,90,58,0.5);
+  background: rgba(224,90,58,0.12);
+  color: #F87155;
+  cursor: pointer;
+  transition: all .12s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.draw-exit-btn:hover { background: #E05A3A; color: #fff; border-color: #E05A3A; }
+
+/* Pen / Eraser mode buttons */
+.draw-mode-btn {
+  font-family: var(--fd);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 4px 11px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: all .12s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.draw-mode-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.draw-mode-btn.active { background: rgba(255,255,255,0.2); color: #fff; border-color: rgba(255,255,255,0.45); }
+
+.draw-vsep {
+  width: 1px; height: 18px;
+  background: rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.draw-section-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: rgba(255,255,255,0.35);
+  white-space: nowrap;
+}
+
+.draw-colors {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.draw-color-dot {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+  flex-shrink: 0;
+}
+.draw-color-dot:hover  { transform: scale(1.2); }
+.draw-color-dot.active { box-shadow: 0 0 0 2px #1C1B19, 0 0 0 4px rgba(255,255,255,0.8); transform: scale(1.1); }
+
+.draw-sizes { display: flex; gap: 4px; align-items: center; }
+.draw-size-btn {
+  width: 30px; height: 26px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7);
+  transition: all .12s;
+}
+.draw-size-btn:hover  { background: rgba(255,255,255,0.14); color: #fff; }
+.draw-size-btn.active { background: rgba(255,255,255,0.22); color: #fff; border-color: rgba(255,255,255,0.5); }
+
+.draw-act-btn {
+  font-family: var(--fm); font-size: 10px;
+  padding: 4px 10px; border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.7);
+  cursor: pointer; transition: all .12s;
+  white-space: nowrap;
+}
+.draw-act-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+.draw-hint {
+  font-family: var(--fm); font-size: 9px;
+  color: rgba(255,255,255,0.2);
+  white-space: nowrap;
+  margin-left: 4px;
+}
+
