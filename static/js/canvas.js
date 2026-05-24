@@ -840,8 +840,8 @@ function doDragCard(e) {
   const cid = _dragCard.id;
   // Compute screen-space delta for stroke grouping
   const prevRect = _dragCard.getBoundingClientRect();
-  _dragCard.style.left = Math.max(0, wx) + 'px';
-  _dragCard.style.top  = Math.max(0, wy) + 'px';
+  _dragCard.style.left = wx + 'px';
+  _dragCard.style.top  = wy + 'px';
   if (_cards[cid]) { _cards[cid].wx = wx; _cards[cid].wy = wy; }
   // Move grouped draw strokes with the card
   const newRect = _dragCard.getBoundingClientRect();
