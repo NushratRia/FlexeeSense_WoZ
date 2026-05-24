@@ -49,16 +49,36 @@ function _getCapture() {
   return cap;
 }
 
+// ── Adjust capture to not cover the draw toolbar ─────────────────────────
+function _adjustCaptureForToolbar() {
+  const cap = document.getElementById('draw-capture');
+  const bar = document.getElementById('draw-toolbar');
+  if (!cap) return;
+  if (bar) {
+    // Get toolbar height and offset capture top below it
+    const bh = bar.getBoundingClientRect().height || 36;
+    const bt = parseInt(bar.style.top || '92', 10);
+    cap.style.top    = (bt + bh) + 'px';
+    cap.style.height = `calc(100vh - ${bt + bh}px)`;
+  } else {
+    cap.style.top    = '0';
+    cap.style.height = '100vh';
+  }
+}
+
 // ── Activate / deactivate ─────────────────────────────────────────────────
 function activateDrawMode() {
   _drawActive = true;
   _getSVG();  // ensure visible
   _ensureDrawBar();
-  document.getElementById('draw-toolbar').style.display = '';
+  document.getElementById('draw-toolbar').style.display = 'block';
 
+  // Position capture div BELOW the toolbar (leave room at top for toolbar)
   const cap = _getCapture();
   cap.style.pointerEvents = 'all';
   cap.style.cursor = _eraserMode ? 'cell' : 'crosshair';
+  // Push capture down so draw-toolbar (fixed, z:50) is never covered
+  _adjustCaptureForToolbar();
 
   cap.addEventListener('mousedown',  _drawStart);
   cap.addEventListener('mousemove',  _drawMove);
@@ -91,6 +111,9 @@ function deactivateDrawMode() {
   document.removeEventListener('keydown', _drawKeyDown);
   const bar = document.getElementById('draw-toolbar');
   if (bar) bar.style.display = 'none';
+  // Reset capture to full screen
+  const cap2 = document.getElementById('draw-capture');
+  if (cap2) { cap2.style.top = '0'; cap2.style.height = '100vh'; }
   _removeEraserCircle();
 }
 
@@ -127,10 +150,13 @@ function _drawStart(e) {
       under.closest('.attach-dropdown, .modal, .modal-overlay') ||
       under.closest('.c-card-live, .c-sticky, video')
   )) {
-    under.dispatchEvent(new MouseEvent('click', {
-      bubbles: true, cancelable: true,
-      clientX: e.clientX, clientY: e.clientY,
-    }));
+    // For color-picker input, use native .click() so the OS picker opens
+    if (under.id === 'draw-color-picker' || under.closest('#draw-color-picker')) {
+      const inp = document.getElementById('draw-color-picker');
+      if (inp) inp.click();
+    } else {
+      under.click();
+    }
     return;
   }
 
@@ -141,6 +167,7 @@ function _drawStart(e) {
 
   if (_eraserMode) {
     _eraseAt(pt.x, pt.y);
+    _showEraserCircle(pt.x, pt.y);
   } else {
     _beginStroke(pt.x, pt.y);
   }
@@ -157,15 +184,19 @@ function _drawTouchStart(e) {
 }
 
 function _drawMove(e) {
-  if (!_drawing) return;
   const pt = { x: e.clientX, y: e.clientY };
-  _curPts.push(pt);
+  // Always show eraser circle on hover when in eraser mode
   if (_eraserMode) {
-    _eraseAt(pt.x, pt.y);
     _showEraserCircle(pt.x, pt.y);
-  } else {
-    _updatePath(_curStroke, _curGlow, _curPts);
+    if (_drawing) {
+      _curPts.push(pt);
+      _eraseAt(pt.x, pt.y);
+    }
+    return;
   }
+  if (!_drawing) return;
+  _curPts.push(pt);
+  _updatePath(_curStroke, _curGlow, _curPts);
 }
 
 function _drawTouchMove(e) {
@@ -292,6 +323,7 @@ function setEraserMode(on) {
   _eraserMode = on;
   const cap = document.getElementById('draw-capture');
   if (cap) cap.style.cursor = on ? 'cell' : 'crosshair';
+  if (!on) _removeEraserCircle();   // hide circle when switching back to pen
   _updateEraserBtns();
 }
 
@@ -440,11 +472,16 @@ function _ensureDrawBar() {
       <div class="draw-vsep"></div>
       <button class="draw-act-btn" onclick="undoLastStroke()"  title="Undo last stroke">↩ Undo</button>
       <button class="draw-act-btn" onclick="clearAllStrokes()" title="Clear all strokes">🗑 Clear all</button>
-      <span class="draw-hint">Right-click / double-click stroke to remove · E = eraser · Esc = exit</span>
+      
     </div>`;
 
-  const header = document.getElementById('canvas-panel').querySelector('.panel-header');
-  header.insertAdjacentElement('afterend', bar);
+  // Attach to body at z-index:50 (above draw-capture at z:41) so clicks always work
+  bar.style.position = 'fixed';
+  bar.style.top      = '92px';   // below topbar(50px) + panel header(42px)
+  bar.style.left     = '0';
+  bar.style.right    = '0';
+  bar.style.zIndex   = '50';
+  document.body.appendChild(bar);
 }
 
 // ── Pen color & size ──────────────────────────────────────────────────────

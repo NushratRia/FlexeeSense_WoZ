@@ -2154,11 +2154,14 @@ body.resizing * { user-select: none !important; }
    DRAW TOOL
 ═══════════════════════════════════════════════ */
 .draw-toolbar {
-  background: var(--g900);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: #111110;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 2px solid #E05A3A;  /* coral accent so it's obvious */
   flex-shrink: 0;
   display: none;
   animation: slideDown .15s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  /* position:fixed and z-index:50 set inline in JS */
 }
 @keyframes slideDown { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
 
