@@ -2271,3 +2271,12 @@ body.resizing * { user-select: none !important; }
   margin-left: 4px;
 }
 
+
+/* ── Drag-to-viewer drop indicator ── */
+#viewer-drop-indicator {
+  animation: viewer-drop-pulse 1s ease-in-out infinite alternate;
+}
+@keyframes viewer-drop-pulse {
+  from { opacity: 0.75; }
+  to   { opacity: 1; }
+}

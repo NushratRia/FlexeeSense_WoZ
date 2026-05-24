@@ -82,7 +82,24 @@ document.addEventListener('DOMContentLoaded', () => {
       _panning = false;
       surface.style.cursor = _spaceDown ? 'grab' : '';
     }
-    if (_dragCard) { _dragCard.style.zIndex = ''; _dragCard = null; redrawLinks(); }
+    if (_dragCard) {
+      // Check if released over the viewer panel — if so, open in viewer
+      const viewer = document.getElementById('viewer-panel');
+      const vr     = viewer?.getBoundingClientRect();
+      const card   = _cards[_dragCard.id];
+      if (vr && e.clientX >= vr.left && e.clientX <= vr.right &&
+          e.clientY >= vr.top  && e.clientY <= vr.bottom &&
+          card && ['pdf','video','notebook'].includes(card.type)) {
+        // Open this card's file in the left viewer
+        _openCardInViewer(card);
+      }
+      // Always clean up
+      _setViewerDropHighlight(false);
+      _overViewerDrop = false;
+      _dragCard.style.zIndex = '';
+      _dragCard = null;
+      redrawLinks();
+    }
     if (_resizing) { _resizing = null; document.body.style.cursor = ''; document.body.style.userSelect = ''; }
   });
 
@@ -838,17 +855,89 @@ function doDragCard(e) {
   const wx = (e.clientX - sRect.left - _panX) / _zoom - _dragOffX / _zoom;
   const wy = (e.clientY - sRect.top  - _panY) / _zoom - _dragOffY / _zoom;
   const cid = _dragCard.id;
-  // Compute screen-space delta for stroke grouping
   const prevRect = _dragCard.getBoundingClientRect();
   _dragCard.style.left = wx + 'px';
   _dragCard.style.top  = wy + 'px';
   if (_cards[cid]) { _cards[cid].wx = wx; _cards[cid].wy = wy; }
-  // Move grouped draw strokes with the card
   const newRect = _dragCard.getBoundingClientRect();
   const sdx = newRect.left - prevRect.left;
   const sdy = newRect.top  - prevRect.top;
   if (typeof moveStrokesWithCard === 'function') moveStrokesWithCard(cid, sdx, sdy);
   if (typeof redrawLinks === 'function') redrawLinks();
+
+  // Show drop-zone highlight when dragging over the viewer panel
+  _checkViewerDropZone(e.clientX, e.clientY, cid);
+}
+
+// Track whether we're hovering the viewer drop zone
+let _overViewerDrop = false;
+
+function _checkViewerDropZone(cx, cy, cardId) {
+  const viewer = document.getElementById('viewer-panel');
+  if (!viewer) return;
+  const vr = viewer.getBoundingClientRect();
+  const card = _cards[cardId];
+  // Only show for pdf/video/notebook cards (not sticky/link)
+  const eligible = card && ['pdf','video','notebook'].includes(card.type);
+  const inside   = eligible && cx >= vr.left && cx <= vr.right && cy >= vr.top && cy <= vr.bottom;
+
+  if (inside !== _overViewerDrop) {
+    _overViewerDrop = inside;
+    _setViewerDropHighlight(inside, card?.type);
+  }
+}
+
+function _setViewerDropHighlight(active, type) {
+  const viewer = document.getElementById('viewer-panel');
+  if (!viewer) return;
+
+  let indicator = document.getElementById('viewer-drop-indicator');
+  if (active) {
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.id = 'viewer-drop-indicator';
+      indicator.style.cssText = [
+        'position:absolute', 'inset:0', 'z-index:100',
+        'pointer-events:none', 'border-radius:0',
+        'display:flex', 'flex-direction:column',
+        'align-items:center', 'justify-content:center',
+        'gap:8px', 'transition:opacity .15s',
+      ].join(';');
+      viewer.style.position = 'relative';
+      viewer.appendChild(indicator);
+    }
+    const colors = { pdf:'#E05A3A', video:'#D4850A', notebook:'#6B4FBB' };
+    const icons  = { pdf:'📄', video:'🎬', notebook:'📓' };
+    const col    = colors[type] || '#2B6CB0';
+    indicator.style.cssText += `;background:${col}18;border:3px dashed ${col};`;
+    indicator.innerHTML = `
+      <div style="font-size:32px;line-height:1">${icons[type]||'📎'}</div>
+      <div style="font-family:'Cabinet Grotesk',sans-serif;font-weight:800;font-size:15px;color:${col}">
+        Drop to open in viewer
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:${col};opacity:.7">
+        Replaces current ${type} in left panel
+      </div>`;
+  } else {
+    indicator?.remove();
+    _overViewerDrop = false;
+  }
+}
+
+// ─── Open canvas card in left viewer ────────────────────────────────────
+function _openCardInViewer(card) {
+  if (!card || !card.fileEntry) {
+    showToast('⚠ This card has no file to open', '#D4850A');
+    return;
+  }
+  const entry = card.fileEntry;
+  // activateFile is defined in upload.js — it loads the file into the correct viewer tab
+  if (typeof activateFile === 'function') {
+    activateFile(entry);
+    showToast('📂 Opened in viewer: ' + entry.name, '#1A8F6F');
+  } else {
+    showToast('⚠ Viewer not ready', '#D4850A');
+  }
 }
 
 // ─── Resize ───────────────────────────────────────────────────────────────
