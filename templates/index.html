@@ -26,6 +26,12 @@
       <div class="metric-pill">Links <b id="m-links">0</b></div>
       <div class="metric-pill">Files <b id="m-files">0</b></div>
     </div>
+    <!-- ── Collaborate button (collab.js wires onclick via collabTogglePanel) ── -->
+    <button class="tbtn collab-join-btn" id="collab-btn"
+            onclick="typeof collabTogglePanel==='function'&&collabTogglePanel()"
+            title="Share this canvas session with others">
+      &#x1F465; Collaborate
+    </button>
     <button class="tbtn" onclick="resetSession()">&#8635; Reset</button>
   </div>
 </header>
@@ -307,5 +313,7 @@
 <script src="/static/js/links.js"></script>
 <script src="/static/js/draw.js"></script>
 <script src="/static/js/app.js"></script>
+<!-- ── Collaboration module — loads after all other scripts ── -->
+<script src="/static/js/collab.js"></script>
 </body>
 </html>

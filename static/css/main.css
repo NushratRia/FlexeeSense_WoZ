@@ -2280,3 +2280,24 @@ body.resizing * { user-select: none !important; }
   from { opacity: 0.75; }
   to   { opacity: 1; }
 }
+
+/* ── Collaborate button ── */
+.collab-join-btn {
+  background: rgba(37,99,235,0.12) !important;
+  border-color: rgba(37,99,235,0.35) !important;
+  color: #93C5FD !important;
+  transition: all .15s;
+}
+.collab-join-btn:hover {
+  background: rgba(37,99,235,0.22) !important;
+  color: #BFDBFE !important;
+}
+.collab-join-btn.connected {
+  background: rgba(26,143,111,0.15) !important;
+  border-color: rgba(26,143,111,0.4) !important;
+  color: #6EDFC0 !important;
+}
+#collab-panel input:focus {
+  border-color: rgba(37,99,235,0.5) !important;
+  outline: none;
+}
