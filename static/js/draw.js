@@ -11,6 +11,11 @@
 // ── State ─────────────────────────────────────────────────────────────────
 const _strokes   = {};
 let   _strokeCnt = 0;
+
+// ── Collaboration hooks — set by collab.js to sync strokes ──────────────
+// window.onStrokeAdded(id, points, color, width)  called after each stroke
+// window.onStrokeDeleted(id)                       called when a stroke is removed
+// These are no-ops by default; collab.js assigns them after joining a room.
 let   _drawing   = false;
 let   _curStroke = null;
 let   _curGlow   = null;
@@ -271,6 +276,11 @@ function _finalizeStroke() {
 
   const n = linkedAnnots.length + linkedCards.length;
   if (n > 0) showToast(`✏ Stroke grouped with ${n} element${n>1?'s':''}`, '#1A8F6F');
+
+  // Notify collaboration layer
+  if (typeof window.onStrokeAdded === 'function') {
+    window.onStrokeAdded(id, [..._curPts], _drawColor, _drawWidth);
+  }
 }
 
 // Small invisible hit-target at stroke centroid for right-click
@@ -472,7 +482,7 @@ function _ensureDrawBar() {
       <div class="draw-vsep"></div>
       <button class="draw-act-btn" onclick="undoLastStroke()"  title="Undo last stroke">↩ Undo</button>
       <button class="draw-act-btn" onclick="clearAllStrokes()" title="Clear all strokes">🗑 Clear all</button>
-      
+      <span class="draw-hint">Right-click / double-click stroke to remove · E = eraser · Esc = exit</span>
     </div>`;
 
   // Attach to body at z-index:50 (above draw-capture at z:41) so clicks always work
@@ -524,6 +534,10 @@ function deleteStroke(id) {
   document.getElementById(id + '-hit')?.remove();
   delete _strokes[id];
   showToast('🗑 Stroke removed', '#6B7280');
+  // Notify collaboration layer
+  if (typeof window.onStrokeDeleted === 'function') {
+    window.onStrokeDeleted(id);
+  }
 }
 
 function changeStrokeColor(id) {

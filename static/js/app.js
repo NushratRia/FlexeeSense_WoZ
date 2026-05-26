@@ -19,23 +19,31 @@ function showToast(msg, color) {
   _toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// ── RESET ──
+// ── RESET ── clears client state AND server-side uploaded files
 function resetSession() {
-  if (!confirm('Reset session? All uploads and links will be cleared.')) return;
-  // Remove all files
-  Object.keys(FILES).forEach(id => removeFile(id));
-  // Remove all links
-  Object.keys(LINKS).forEach(id => removeLink(id));
-  // Clear canvas
-  Object.keys(_cards).forEach(id => { _cards[id].el.remove(); });
-  Object.assign(_cards, {});
-  _cardCounter = 0;
-  document.getElementById('link-lines-svg').innerHTML = '';
-  document.getElementById('canvas-subtitle').textContent = '0 elements';
-  // Reset metrics
-  ['m-ctx','m-dei','m-links','m-files'].forEach(id => document.getElementById(id).textContent = '0');
+  if (!confirm('Reset session? All uploads and canvas elements will be cleared.')) return;
+
+  // Tell server to delete uploaded files and clear room state
+  fetch('/reset_session', { method: 'POST' })
+    .then(r => r.json())
+    .then(d => { if (!d.ok) console.warn('[reset] server error:', d.error); })
+    .catch(e => console.warn('[reset] server unreachable:', e));
+
+  // Clear client-side state
+  Object.keys(typeof FILES!=='undefined'?FILES:{}).forEach(id => { try{removeFile(id);}catch(_){} });
+  Object.keys(typeof LINKS!=='undefined'?LINKS:{}).forEach(id => { try{removeLink(id);}catch(_){} });
+  Object.keys(typeof _cards!=='undefined'?_cards:{}).forEach(id => { _cards[id]?.el?.remove(); });
+  if (typeof _cards !== 'undefined') { Object.keys(_cards).forEach(k=>delete _cards[k]); }
+  if (typeof _cardCounter !== 'undefined') window._cardCounter = 0;
+  const lsvg = document.getElementById('link-lines-svg');
+  if (lsvg) lsvg.innerHTML = '<defs id="svg-defs"></defs>';
+  const sub = document.getElementById('canvas-subtitle');
+  if (sub) sub.textContent = '0 elements';
+  ['m-ctx','m-dei','m-links','m-files'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = '0';
+  });
   _sessionSec = 0;
-  showToast('↺ Session reset', '#6B6A66');
+  showToast('↺ Session reset — uploads cleared', '#6B6A66');
 }
 
 // ── MISC ──

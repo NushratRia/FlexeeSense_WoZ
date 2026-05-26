@@ -26,10 +26,17 @@ except ImportError:
     HAS_PYPDF = False
 
 app = Flask(__name__)
-app.config['SECRET_KEY']       = 'flexasense-collab-secret'
-app.config['UPLOAD_FOLDER']    = os.path.join(os.path.dirname(__file__), 'uploads')
+app.config['SECRET_KEY']        = 'flexasense-collab-secret'
+app.config['UPLOAD_FOLDER']     = os.path.join(os.path.dirname(__file__), 'uploads')
 app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# ── Clear uploads on every server start (session files are temporary) ─────
+import shutil
+_upload_dir = app.config['UPLOAD_FOLDER']
+if os.path.exists(_upload_dir):
+    shutil.rmtree(_upload_dir)      # wipe all previous session files
+os.makedirs(_upload_dir)            # recreate empty folder
+print('[flexasense] Uploads folder cleared — new session started.')
 
 # Threading mode — works without eventlet/gevent
 socketio = SocketIO(app, cors_allowed_origins='*', async_mode='threading')
@@ -41,7 +48,7 @@ _room_peers = {}   # room_id -> { sid -> { name, color, cursor } }
 
 def _get_room(room):
     if room not in _room_state:
-        _room_state[room] = { 'cards': {}, 'strokes': {}, 'links': {}, 'files': {} }
+        _room_state[room] = { 'cards': {}, 'stickies': {}, 'strokes': {}, 'links': {}, 'files': {} }
     if room not in _room_peers:
         _room_peers[room] = {}
     return _room_state[room], _room_peers[room]
@@ -107,6 +114,21 @@ def extract_text():
         return jsonify({'pages': [], 'error': str(e)})
 
 # ── Debug endpoint — inspect live room state ──────────────────────────────
+@app.route('/reset_session', methods=['POST'])
+def reset_session_files():
+    """Called by the browser Reset button — clears all uploaded files and room state."""
+    upload_dir = app.config['UPLOAD_FOLDER']
+    try:
+        shutil.rmtree(upload_dir)
+        os.makedirs(upload_dir)
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)}), 500
+    # Also wipe in-memory room state so canvas resets for all peers
+    _room_state.clear()
+    _room_peers.clear()
+    print('[flexasense] Session reset — uploads and room state cleared.')
+    return jsonify({'ok': True})
+
 @app.route('/collab/debug')
 def collab_debug():
     """Shows current room state. Open in browser for easy debugging."""
@@ -180,7 +202,17 @@ def on_card_move(data):
     if data['id'] in state['cards']:
         state['cards'][data['id']]['x'] = data['x']
         state['cards'][data['id']]['y'] = data['y']
+    if data['id'] in state.get('stickies', {}):
+        state['stickies'][data['id']]['x'] = data['x']
+        state['stickies'][data['id']]['y'] = data['y']
     emit('canvas_card_move', data, to=room, skip_sid=request.sid)
+
+@socketio.on('canvas_sticky_add')
+def on_sticky_add(data):
+    room = data.get('room', 'main')
+    state, _ = _get_room(room)
+    state.setdefault('stickies', {})[data['id']] = data
+    emit('canvas_sticky_add', data, to=room, skip_sid=request.sid)
 
 @socketio.on('canvas_card_resize')
 def on_card_resize(data):
@@ -195,6 +227,7 @@ def on_card_delete(data):
     room = data.get('room', 'main')
     state, _ = _get_room(room)
     state['cards'].pop(data['id'], None)
+    state.get('stickies', {}).pop(data['id'], None)
     emit('canvas_card_delete', data, to=room, skip_sid=request.sid)
 
 @socketio.on('canvas_stroke_add')
@@ -246,9 +279,10 @@ def on_cursor(data):
 def on_canvas_clear(data):
     room = data.get('room', 'main')
     state, _ = _get_room(room)
-    state['cards']   = {}
-    state['strokes'] = {}
-    state['links']   = {}
+    state['cards']    = {}
+    state['stickies'] = {}
+    state['strokes']  = {}
+    state['links']    = {}
     emit('canvas_clear', data, to=room, skip_sid=request.sid)
 
 # ── WebRTC signaling relay (server just forwards, never touches media) ──────
@@ -267,7 +301,19 @@ def on_webrtc_ice(data):
     to  = data.get('to')
     emit('webrtc_ice',    {**data, 'from': request.sid}, to=to)
 
-if __name__ == '__main__':
-    print('FlexaSense collab server starting on http://localhost:5050')
-    print('Debug room state: http://localhost:5050/collab/debug')
-    socketio.run(app, debug=True, port=5050, allow_unsafe_werkzeug=True)
+# if __name__ == '__main__':
+#     print('FlexaSense collab server starting on http://localhost:5050')
+#     print('Debug room state: http://localhost:5050/collab/debug')
+#     socketio.run(app, debug=True, port=5050, allow_unsafe_werkzeug=True)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5050))
+    print(f"FlexaSense collab server starting on 0.0.0.0:{port}")
+
+    socketio.run(
+        app,
+        host="0.0.0.0",
+        port=port,
+        debug=False,
+        allow_unsafe_werkzeug=True
+    )

@@ -214,8 +214,20 @@ function _registerSocketEvents() {
       Object.values(state.files || {}).forEach(f => {
         if (!FILES[f.id]) { FILES[f.id] = f; if(typeof addFileChip==='function') addFileChip(f); }
       });
+      // Register files first so cards can find their fileEntry
+      Object.values(state.files || {}).forEach(f => {
+        if (!FILES[f.id]) { FILES[f.id] = f; }
+      });
+      // Cards (live PDF/video/notebook cards)
       Object.values(state.cards   || {}).forEach(c => _applyCardAdd(c));
+      // Sticky cards
+      Object.values(state.stickies || {}).forEach(s => _applyStickyAdd(s));
+      // Draw strokes
       Object.values(state.strokes || {}).forEach(s => _applyStrokeAdd(s));
+      // Connector links — after cards exist
+      setTimeout(() => {
+        Object.values(state.links || {}).forEach(l => _applyLinkAdd(l));
+      }, 800);
     } finally { _applyingRemote = false; }
 
     _updatePeersList(data.peers || []);
@@ -248,6 +260,8 @@ function _registerSocketEvents() {
 
   // Canvas sync
   _socket.on('canvas_card_add',    d => { _applyingRemote=true; try{_applyCardAdd(d);}    finally{_applyingRemote=false;} });
+  _socket.on('canvas_link_add',    d => { _applyingRemote=true; try{_applyLinkAdd(d);}    finally{_applyingRemote=false;} });
+  _socket.on('canvas_link_delete', d => { _applyingRemote=true; try{ if(typeof removeLink==='function') removeLink(d.linkId); } finally{_applyingRemote=false;} });
   _socket.on('canvas_card_move',   d => { _applyingRemote=true; try{_applyCardMove(d);}   finally{_applyingRemote=false;} });
   _socket.on('canvas_card_resize', d => { _applyingRemote=true; try{_applyCardResize(d);} finally{_applyingRemote=false;} });
   _socket.on('canvas_card_delete', d => { _applyingRemote=true; try{deleteCard(d.id);}    finally{_applyingRemote=false;} });
@@ -278,21 +292,29 @@ function _registerSocketEvents() {
 
 // ── Canvas patching ───────────────────────────────────────────────────────
 function _patchCanvas() {
-  // createLiveCard
+  // createLiveCard — 4th param _remoteId lets _applyCardAdd set canonical id
   const _origCreate = window.createLiveCard;
-  window.createLiveCard = function(entry, x, y) {
+  window.createLiveCard = function(entry, x, y, _remoteId) {
     const id = _origCreate(entry, x, y);
-    if (!_applyingRemote && id) {
-      const card = _cards[id];
+    // Remap to remote id immediately if provided (remote apply)
+    if (_remoteId && id && _remoteId !== id && _cards[id]) {
+      _cards[_remoteId]       = _cards[id];
+      _cards[_remoteId].id    = _remoteId;
+      _cards[_remoteId].el.id = _remoteId;
+      delete _cards[id];
+    }
+    const finalId = _remoteId || id;
+    if (!_applyingRemote && finalId) {
+      const card = _cards[finalId];
       _emit('canvas_card_add', {
-        id, x: x||60, y: y||60,
+        id: finalId, x: x||60, y: y||60,
         w: parseFloat(card?.el?.style.width)||400,
         h: parseFloat(card?.el?.style.height)||300,
         fileEntry: entry, fileId: entry.id,
       });
       _emit('file_shared', entry);
     }
-    return id;
+    return finalId;
   };
 
   // createStickyCard
@@ -357,28 +379,62 @@ function _patchCanvas() {
     if (!_applyingRemote) _emit('canvas_clear', {});
   };
 
-  // deleteStroke
+  // deleteStroke — also handled via window.onStrokeDeleted hook below
+  // (kept here as fallback for any direct calls)
   const _origDelStroke = window.deleteStroke;
   window.deleteStroke = function(id) {
     if (typeof _origDelStroke === 'function') _origDelStroke(id);
-    if (!_applyingRemote) _emit('canvas_stroke_delete', { id });
+    // emit handled by onStrokeDeleted hook set below
   };
 
-  // Proxy _strokes to emit new strokes
-  if (typeof window._strokes !== 'undefined') {
-    try {
-      window._strokes = new Proxy(window._strokes, {
-        set(target, key, value) {
-          target[key] = value;
-          if (!_applyingRemote && typeof key==='string' && key.startsWith('stroke-') && value?.points?.length) {
-            _emit('canvas_stroke_add', { id:key, points:value.points, color:value.color, width:value.width });
-          }
-          return true;
-        },
-        deleteProperty(target, key) { delete target[key]; return true; }
-      });
-    } catch(e) { console.warn('[collab] Could not proxy _strokes:', e); }
-  }
+  // ── Draw stroke hooks — draw.js calls these directly ──────────────────
+  // Much more reliable than proxying the _strokes object (which is module-scoped)
+  window.onStrokeAdded = function(id, points, color, width) {
+    if (!_applyingRemote) {
+      _emit('canvas_stroke_add', { id, points, color, width });
+    }
+  };
+
+  window.onStrokeDeleted = function(id) {
+    if (!_applyingRemote) {
+      _emit('canvas_stroke_delete', { id });
+    }
+  };
+
+  // Patch createLink — emit the full anchor+cardId so peers can recreate the line
+  const _origCreateLink = window.createLink;
+  window.createLink = function(anchor, cardId, sourceEl) {
+    _origCreateLink(anchor, cardId, sourceEl);
+    if (!_applyingRemote) {
+      // Find the link just created (last entry in LINKS)
+      const linkIds = Object.keys(LINKS);
+      const linkId  = linkIds[linkIds.length - 1];
+      if (linkId) {
+        _emit('canvas_link_add', {
+          linkId, cardId,
+          anchor: {
+            type:     anchor.type,
+            fileId:   anchor.fileId,
+            anchorId: anchor.anchorId,
+            annotId:  anchor.annotId,
+            text:     anchor.text,
+            label:    anchor.label,
+            time:     anchor.time,        // for video timestamps
+            fromCard: anchor.fromCard,
+          },
+        });
+      }
+    }
+  };
+
+  // Patch removeLink — tell peers to remove their copy
+  const _origRemoveLink = window.removeLink;
+  window.removeLink = function(linkId, e) {
+    _origRemoveLink(linkId, e);
+    if (!_applyingRemote) {
+      _emit('canvas_link_delete', { linkId });
+    }
+  };
 
   console.log('[collab] canvas patched ✓');
 }
@@ -387,20 +443,20 @@ function _patchCanvas() {
 function _applyCardAdd(data) {
   if (!data.id || _cards[data.id]) return;
   const entry = data.fileEntry || FILES[data.fileId];
-  if (!entry) { console.warn('[collab] file not found for card', data.fileId); return; }
-  const id = window.createLiveCard.__orig
-    ? window.createLiveCard.__orig(entry, data.x||60, data.y||60)
-    : (() => { _applyingRemote=true; const i=createLiveCard(entry,data.x||60,data.y||60); _applyingRemote=false; return i; })();
-  // createLiveCard is now patched — re-set _applyingRemote guard
-  _applyingRemote = false;
-  // Find the newly created card (last key in _cards)
-  const newId = Object.keys(_cards).filter(k=>!k.startsWith('sticky')).pop();
-  if (newId && newId !== data.id) {
-    _cards[data.id]     = _cards[newId];
-    _cards[data.id].id  = data.id;
-    _cards[data.id].el.id = data.id;
-    delete _cards[newId];
+  if (!entry) {
+    console.warn('[collab] file not found for card:', data.fileId, '— queuing retry');
+    // Retry after 500ms once file_shared may have arrived
+    setTimeout(() => { if (!_cards[data.id]) _applyCardAdd(data); }, 500);
+    return;
   }
+  _applyingRemote = true;
+  try {
+    // Pass remote id as 4th param — createLiveCard remaps internally
+    createLiveCard(entry, data.x||60, data.y||60, data.id);
+  } finally {
+    _applyingRemote = false;
+  }
+  // Apply stored size
   const el = _cards[data.id]?.el;
   if (el) {
     if (data.w) el.style.width  = data.w + 'px';
@@ -413,10 +469,12 @@ function _applyStickyAdd(data) {
   _applyingRemote = true;
   try {
     createStickyCard(data.x||60, data.y||60, data.text||'');
-    const newId = Object.keys(_cards).filter(k=>k.startsWith('sticky')).pop();
-    if (newId && newId !== data.id) {
-      _cards[data.id]    = _cards[newId];
-      _cards[data.id].id = data.id;
+    // Remap local id → remote id
+    const keys = Object.keys(_cards);
+    const newId = keys[keys.length - 1];
+    if (newId && newId !== data.id && _cards[newId]) {
+      _cards[data.id]       = _cards[newId];
+      _cards[data.id].id    = data.id;
       _cards[data.id].el.id = data.id;
       delete _cards[newId];
     }
@@ -435,6 +493,62 @@ function _applyCardResize(data) {
   if (data.w) card.el.style.width  = data.w + 'px';
   if (data.h) card.el.style.height = data.h + 'px';
   if (typeof redrawLinks === 'function') redrawLinks();
+}
+
+function _applyLinkAdd(data) {
+  if (!data.linkId || !data.cardId || !data.anchor) return;
+  // Don't recreate if already exists
+  if (typeof LINKS !== 'undefined' && LINKS[data.linkId]) return;
+  // Card must exist
+  if (!_cards[data.cardId]) {
+    // Retry after cards may have loaded
+    setTimeout(() => { if(!LINKS?.[data.linkId]) _applyLinkAdd(data); }, 600);
+    return;
+  }
+
+  // For sentence/PDF links: find the annotation mark element as sourceEl
+  // For video timestamps: source is the video player element
+  // For code lines: source is the code line element
+  let sourceEl = null;
+  const a = data.anchor;
+  if (a.annotId) {
+    sourceEl = document.getElementById('annot-' + a.annotId + '-mark')
+            || document.querySelector(`[data-annot-id="${a.annotId}"]`);
+  } else if (a.type === 'timestamp') {
+    sourceEl = document.getElementById('video-player');
+  } else if (a.anchorId) {
+    sourceEl = document.getElementById('cl-' + a.anchorId)
+            || document.getElementById('cnbl-' + a.anchorId);
+  }
+
+  // Use createLink directly, bypassing the startLinkFromAnchor UI flow
+  if (typeof createLink === 'function') {
+    createLink(a, data.cardId, sourceEl);
+    // The link was created with a new local linkId — remap to remote linkId
+    const linkIds = Object.keys(LINKS);
+    const newLinkId = linkIds[linkIds.length - 1];
+    if (newLinkId && newLinkId !== data.linkId && LINKS[newLinkId]) {
+      LINKS[data.linkId] = LINKS[newLinkId];
+      LINKS[data.linkId].linkId = data.linkId;
+      delete LINKS[newLinkId];
+      // Fix SVG element IDs
+      const renameSvgEl = (oldId, newId) => {
+        const el = document.getElementById(oldId);
+        if (el) el.id = newId;
+      };
+      renameSvgEl('lline-'  + newLinkId, 'lline-'  + data.linkId);
+      renameSvgEl('lglow-'  + newLinkId, 'lglow-'  + data.linkId);
+      renameSvgEl('llabel-' + newLinkId, 'llabel-' + data.linkId);
+      // Fix badge id
+      const badge = document.getElementById('la-' + newLinkId);
+      if (badge) badge.id = 'la-' + data.linkId;
+      // Fix card anchors array
+      const card = _cards[data.cardId];
+      if (card?.anchors) {
+        card.anchors = card.anchors.map(id => id === newLinkId ? data.linkId : id);
+      }
+    }
+  }
 }
 
 function _applyStrokeAdd(data) {
