@@ -1055,3 +1055,149 @@ Traceback (most recent call last):
   File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
     raise NotFound() from None
 werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 14:13:55  INFO      ============================================================
+2026-06-02 14:13:55  INFO      FlexaSense server starting
+2026-06-02 14:13:55  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:13:55  INFO      ============================================================
+2026-06-02 14:13:55  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 14:13:55  INFO      Uploads folder cleared — new session started
+2026-06-02 14:13:55  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 14:13:55  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 14:13:55  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:14:01  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 14:14:02  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 14:19:16  INFO      ============================================================
+2026-06-02 14:19:16  INFO      FlexaSense server starting
+2026-06-02 14:19:16  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:19:16  INFO      ============================================================
+2026-06-02 14:19:17  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 14:19:17  INFO      Uploads folder cleared — new session started
+2026-06-02 14:19:17  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 14:19:17  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 14:19:17  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:19:19  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 14:19:20  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 14:20:10  INFO      ============================================================
+2026-06-02 14:20:10  INFO      FlexaSense server starting
+2026-06-02 14:20:10  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:20:10  INFO      ============================================================
+2026-06-02 14:20:10  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 14:20:10  INFO      Uploads folder cleared — new session started
+2026-06-02 14:20:10  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 14:20:10  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 14:20:10  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:20:12  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 14:20:12  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 16:19:19  INFO      ============================================================
+2026-06-02 16:19:19  INFO      FlexaSense server starting
+2026-06-02 16:19:19  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 16:19:19  INFO      ============================================================
+2026-06-02 16:19:19  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 16:19:19  INFO      Uploads folder cleared — new session started
+2026-06-02 16:19:19  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 16:19:19  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 16:19:19  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 16:19:21  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 16:19:22  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 16:19:39  ERROR     HTTP_ERROR  GET /.well-known/appspecific/com.chrome.devtools.json  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 16:26:01  INFO      ============================================================
+2026-06-02 16:26:01  INFO      FlexaSense server starting
+2026-06-02 16:26:01  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 16:26:01  INFO      ============================================================
+2026-06-02 16:26:01  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 16:26:01  INFO      Uploads folder cleared — new session started
+2026-06-02 16:26:01  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 16:26:01  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 16:26:01  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 16:26:05  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 16:26:05  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
