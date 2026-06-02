@@ -1,0 +1,113 @@
+/* FlexeeSense canvas-only MediaPipe hand overlay
+   Added as a separate file so the existing canvas/viewer code remains unchanged. */
+
+.hand-gesture-toggle {
+  border-color: rgba(26, 143, 111, 0.35) !important;
+}
+
+.hand-gesture-toggle.on {
+  background: rgba(26, 143, 111, 0.12) !important;
+  color: var(--teal, #1a8f6f) !important;
+  border-color: var(--teal, #1a8f6f) !important;
+}
+
+#hand-gesture-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  overflow: hidden;
+  display: none;
+  background: transparent;
+}
+
+#hand-gesture-layer.hg-on {
+  display: block;
+}
+
+#hand-gesture-video,
+#hand-gesture-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+#hand-gesture-video {
+  transform: scaleX(-1);
+  transform-origin: center center;
+}
+
+#hand-gesture-video {
+  opacity: 0.20;
+  filter: grayscale(1);
+}
+
+#hand-gesture-canvas {
+  opacity: 1;
+}
+
+#hand-gesture-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 65;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border, #d8d1c8);
+  box-shadow: var(--shadow, 0 10px 24px rgba(0,0,0,.12));
+  pointer-events: all;
+  user-select: none;
+  backdrop-filter: blur(6px);
+}
+
+#hand-gesture-controls.hg-on {
+  display: flex;
+}
+
+.hg-label {
+  font-family: var(--fm, monospace);
+  font-size: 10px;
+  color: var(--ink-3, #555);
+  white-space: nowrap;
+}
+
+#hand-gesture-opacity {
+  width: 128px;
+  cursor: pointer;
+}
+
+.hg-value {
+  min-width: 34px;
+  text-align: right;
+  font-family: var(--fm, monospace);
+  font-size: 10px;
+  color: var(--ink-3, #555);
+}
+
+#hand-gesture-status {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 65;
+  display: none;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid var(--border, #d8d1c8);
+  color: var(--ink-3, #555);
+  font-family: var(--fm, monospace);
+  font-size: 10px;
+  pointer-events: none;
+  box-shadow: var(--shadow, 0 10px 24px rgba(0,0,0,.12));
+}
+
+#hand-gesture-status.hg-on {
+  display: block;
+}

@@ -1,0 +1,1057 @@
+2026-06-01 13:57:38  INFO      flexasense            ======================================================================
+2026-06-01 13:57:38  INFO      flexasense            FlexaSense server starting  |  log → /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-01 13:57:38  INFO      flexasense            pypdf available: True
+2026-06-01 13:57:38  INFO      flexasense            Uploads folder cleared  |  dir=/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/uploads
+2026-06-01 13:57:38  INFO      flexasense            Server    http://localhost:5050
+2026-06-01 13:57:38  INFO      flexasense            Log view  http://localhost:5050/log
+2026-06-01 13:57:38  INFO      flexasense            Debug     http://localhost:5050/collab/debug
+2026-06-01 13:57:38  INFO      flexasense            ======================================================================
+2026-06-01 14:02:36  INFO      ============================================================
+2026-06-01 14:02:36  INFO      FlexaSense server starting
+2026-06-01 14:02:36  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-01 14:02:36  INFO      ============================================================
+2026-06-01 14:02:36  INFO      pypdf available — PDF text extraction enabled
+2026-06-01 14:02:36  INFO      Uploads folder cleared — new session started
+2026-06-01 14:02:36  INFO      Starting server on 0.0.0.0:5050
+2026-06-01 14:02:36  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-01 14:02:36  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-01 14:03:42  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 01:28:07  INFO      ============================================================
+2026-06-02 01:28:07  INFO      FlexaSense server starting
+2026-06-02 01:28:07  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 01:28:07  INFO      ============================================================
+2026-06-02 01:28:07  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 01:28:07  INFO      Uploads folder cleared — new session started
+2026-06-02 01:28:07  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 01:28:07  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 01:28:07  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 09:55:46  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 09:55:50  INFO      CONNECT    sid=J2yrGZBUcf99NtvpAAAB  ip=127.0.0.1
+2026-06-02 09:55:50  INFO      JOIN       sid=J2yrGZBUcf99NtvpAAAB  name="Peer 108"  room="main"  peers=1  snapshot={'cards': 0, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 0}
+2026-06-02 09:55:51  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1500  y=249
+2026-06-02 09:55:51  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1145  y=296
+2026-06-02 09:55:52  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1145  y=296
+2026-06-02 09:55:53  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1413  y=154
+2026-06-02 09:55:53  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1385  y=191
+2026-06-02 09:55:54  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=419  y=409
+2026-06-02 09:55:56  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=233  y=454
+2026-06-02 09:55:56  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 09:55:56  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=308  y=452
+2026-06-02 09:55:57  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=304  y=453
+2026-06-02 09:55:57  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=21  y=735
+2026-06-02 09:55:58  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=73  y=727
+2026-06-02 09:55:58  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=79  y=780
+2026-06-02 09:55:58  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=79  y=780
+2026-06-02 09:55:59  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=79  y=768
+2026-06-02 09:55:59  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=79  y=768
+2026-06-02 09:56:00  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=79  y=768
+2026-06-02 09:56:01  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=44  y=765
+2026-06-02 09:56:02  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=74  y=767
+2026-06-02 09:56:02  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=75  y=767
+2026-06-02 09:56:03  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=94  y=705
+2026-06-02 09:56:04  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=123  y=772
+2026-06-02 09:56:05  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=123  y=772
+2026-06-02 09:56:05  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=123  y=771
+2026-06-02 09:56:05  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=123  y=771
+2026-06-02 09:56:05  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=122  y=771
+2026-06-02 09:56:06  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=122  y=771
+2026-06-02 09:56:06  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=122  y=771
+2026-06-02 09:56:06  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=122  y=768
+2026-06-02 09:56:06  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=121  y=767
+2026-06-02 09:56:06  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=121  y=766
+2026-06-02 09:56:07  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=120  y=766
+2026-06-02 09:56:07  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=377  y=428
+2026-06-02 09:56:07  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=377  y=428
+2026-06-02 09:56:08  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=376  y=428
+2026-06-02 09:56:09  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1447  y=267
+2026-06-02 09:56:10  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1312  y=185
+2026-06-02 09:56:11  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1312  y=185
+2026-06-02 09:56:12  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=358  y=443
+2026-06-02 09:56:13  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=142  y=746
+2026-06-02 09:56:13  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=108  y=725
+2026-06-02 09:56:13  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=108  y=726
+2026-06-02 09:56:13  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=108  y=725
+2026-06-02 09:56:14  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=184  y=764
+2026-06-02 09:56:14  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=180  y=752
+2026-06-02 09:56:15  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=121  y=690
+2026-06-02 09:56:15  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=120  y=690
+2026-06-02 09:56:16  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=133  y=702
+2026-06-02 09:56:17  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=189  y=761
+2026-06-02 09:56:17  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=183  y=754
+2026-06-02 09:56:18  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=182  y=753
+2026-06-02 09:56:18  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=250  y=774
+2026-06-02 09:56:18  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=206  y=637
+2026-06-02 09:56:20  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=180  y=562
+2026-06-02 09:56:20  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=179  y=562
+2026-06-02 09:56:21  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1025  y=383
+2026-06-02 09:56:23  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=999  y=463
+2026-06-02 09:56:23  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=978  y=468
+2026-06-02 09:56:23  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=976  y=469
+2026-06-02 09:56:24  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=992  y=426
+2026-06-02 09:56:25  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1053  y=427
+2026-06-02 09:56:26  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1040  y=423
+2026-06-02 09:56:26  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=846  y=439
+2026-06-02 09:56:27  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=846  y=439
+2026-06-02 09:56:33  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=529  y=588
+2026-06-02 09:56:34  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=822  y=403
+2026-06-02 09:56:34  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=822  y=403
+2026-06-02 09:56:35  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=932  y=381
+2026-06-02 09:56:35  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=825  y=391
+2026-06-02 09:56:36  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=825  y=391
+2026-06-02 09:56:36  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=825  y=391
+2026-06-02 09:56:36  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=825  y=391
+2026-06-02 09:56:36  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=826  y=391
+2026-06-02 09:56:36  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=826  y=390
+2026-06-02 09:56:37  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=826  y=390
+2026-06-02 09:56:38  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=826  y=390
+2026-06-02 09:56:38  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=826  y=390
+2026-06-02 09:56:42  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=859  y=476
+2026-06-02 09:56:42  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=859  y=475
+2026-06-02 09:56:49  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=865  y=509
+2026-06-02 09:56:52  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=865  y=509
+2026-06-02 09:57:09  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=526  y=594
+2026-06-02 09:57:47  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=908  y=860
+2026-06-02 09:59:16  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=455  y=777
+2026-06-02 10:38:28  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=637  y=333
+2026-06-02 10:38:28  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=275  y=568
+2026-06-02 10:38:29  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=420  y=518
+2026-06-02 10:38:30  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=420  y=518
+2026-06-02 10:38:30  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=419  y=518
+2026-06-02 10:38:30  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=419  y=517
+2026-06-02 10:38:32  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=938  y=457
+2026-06-02 10:38:34  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1337  y=48
+2026-06-02 10:38:38  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=835  y=14
+2026-06-02 10:38:39  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=864  y=115
+2026-06-02 10:38:39  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=864  y=114
+2026-06-02 10:38:40  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1421  y=98
+2026-06-02 10:38:40  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1421  y=98
+2026-06-02 10:38:40  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1417  y=100
+2026-06-02 10:38:40  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1417  y=100
+2026-06-02 10:38:40  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1417  y=100
+2026-06-02 10:38:41  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1413  y=110
+2026-06-02 10:38:41  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1413  y=110
+2026-06-02 10:38:42  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1276  y=139
+2026-06-02 10:38:43  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=782  y=295
+2026-06-02 10:38:43  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=782  y=295
+2026-06-02 10:38:43  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=781  y=295
+2026-06-02 10:38:44  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=777  y=294
+2026-06-02 10:38:44  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=777  y=294
+2026-06-02 10:38:44  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=777  y=294
+2026-06-02 10:38:45  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=782  y=295
+2026-06-02 10:38:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=738  y=294
+2026-06-02 10:38:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=738  y=294
+2026-06-02 10:38:51  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=639  y=432
+2026-06-02 10:38:51  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=639  y=432
+2026-06-02 10:38:51  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=639  y=433
+2026-06-02 10:38:51  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=639  y=433
+2026-06-02 10:38:52  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=908  y=71
+2026-06-02 10:38:53  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=954  y=104
+2026-06-02 10:38:53  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=954  y=101
+2026-06-02 10:38:59  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=954  y=96
+2026-06-02 10:38:59  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=954  y=96
+2026-06-02 10:38:59  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=954  y=96
+2026-06-02 10:38:59  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=954  y=96
+2026-06-02 10:39:00  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=953  y=97
+2026-06-02 10:39:00  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=953  y=97
+2026-06-02 10:39:00  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=953  y=97
+2026-06-02 10:39:01  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=402  y=537
+2026-06-02 10:39:05  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=641  y=208
+2026-06-02 10:39:07  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=992  y=66
+2026-06-02 10:39:25  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1167  y=603
+2026-06-02 10:39:25  INFO      File uploaded: "2011_infovis_context-preserving-visual-links.pdf"  type=pdf  size=10928KB  id=6d72dcf1-53db-4af3-921d-bead2f1299b1
+2026-06-02 10:39:25  INFO      CARD_ADD   room="main"  id=card-1  type=pdf  total_cards=1
+2026-06-02 10:39:25  INFO      FILE_SHARE room="main"  id=6d72dcf1-53db-4af3-921d-bead2f1299b1  name="2011_infovis_context-preserving-visual-links.pdf"  type=pdf  total=1
+2026-06-02 10:39:25  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1166  y=602
+2026-06-02 10:39:25  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1165  y=602
+2026-06-02 10:39:25  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1165  y=601
+2026-06-02 10:39:25  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1165  y=601
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:25  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:39:26  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1183  y=500
+2026-06-02 10:39:26  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1336  y=351
+2026-06-02 10:39:28  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1336  y=351
+2026-06-02 10:39:28  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1335  y=351
+2026-06-02 10:39:29  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1333  y=351
+2026-06-02 10:39:29  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1333  y=351
+2026-06-02 10:39:29  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1217  y=365
+2026-06-02 10:39:30  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=795  y=389
+2026-06-02 10:39:30  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=776  y=388
+2026-06-02 10:39:30  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=776  y=388
+2026-06-02 10:39:31  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=776  y=388
+2026-06-02 10:39:31  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=779  y=388
+2026-06-02 10:39:31  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=779  y=388
+2026-06-02 10:39:35  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=779  y=388
+2026-06-02 10:39:35  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=697  y=374
+2026-06-02 10:39:35  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=696  y=374
+2026-06-02 10:39:35  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=658  y=370
+2026-06-02 10:39:36  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1022  y=390
+2026-06-02 10:39:42  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1482  y=2
+2026-06-02 10:39:43  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1408  y=19
+2026-06-02 10:39:43  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1408  y=19
+2026-06-02 10:39:44  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1494  y=207
+2026-06-02 10:39:44  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1348  y=152
+2026-06-02 10:39:45  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1380  y=153
+2026-06-02 10:39:45  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1377  y=153
+2026-06-02 10:39:45  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1377  y=153
+2026-06-02 10:39:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1400  y=190
+2026-06-02 10:39:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1400  y=191
+2026-06-02 10:39:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1400  y=190
+2026-06-02 10:39:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1346  y=312
+2026-06-02 10:39:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1274  y=305
+2026-06-02 10:39:46  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=661  y=349
+2026-06-02 10:39:47  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=92  y=121
+2026-06-02 10:39:48  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=87  y=127
+2026-06-02 10:39:49  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1524  y=264
+2026-06-02 10:39:50  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1554  y=26
+2026-06-02 10:39:58  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 10:40:08  INFO      CONNECT    sid=-3jz_zSeaqdHHnWsAAAD  ip=127.0.0.1
+2026-06-02 10:40:08  INFO      JOIN       sid=-3jz_zSeaqdHHnWsAAAD  name="Piii"  room="main"  peers=2  snapshot={'cards': 1, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 1}
+2026-06-02 10:40:08  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:08  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:08  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:08  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:08  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:08  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1443  y=249
+2026-06-02 10:40:08  DEBUG     WEBRTC_OFFER  from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     WEBRTC_ICE    from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:09  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1353  y=223
+2026-06-02 10:40:10  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1357  y=211
+2026-06-02 10:40:10  DEBUG     WEBRTC_ANSWER from=-3jz_zSeaqdHHnWsAAAD → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:10  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:10  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:10  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 10:40:10  DEBUG     WEBRTC_OFFER  from=-3jz_zSeaqdHHnWsAAAD → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:10  DEBUG     WEBRTC_ANSWER from=J2yrGZBUcf99NtvpAAAB → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:10  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1235  y=244
+2026-06-02 10:40:11  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=295  y=531
+2026-06-02 10:40:11  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1039  y=412
+2026-06-02 10:40:13  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1215  y=371
+2026-06-02 10:40:14  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1447  y=197
+2026-06-02 10:40:14  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1438  y=202
+2026-06-02 10:40:15  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=977  y=267
+2026-06-02 10:40:15  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=977  y=267
+2026-06-02 10:40:15  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=227  y=781
+2026-06-02 10:40:16  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=310  y=790
+2026-06-02 10:40:17  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=250  y=10
+2026-06-02 10:40:19  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=596  y=150
+2026-06-02 10:40:20  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1186  y=514
+2026-06-02 10:40:20  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1296  y=555
+2026-06-02 10:40:21  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1296  y=556
+2026-06-02 10:40:21  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1236  y=158
+2026-06-02 10:40:23  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=1276  y=347
+2026-06-02 10:40:23  DEBUG     CURSOR     room="main"  sid=J2yrGZBUcf99NtvpAAAB  x=111  y=8
+2026-06-02 10:40:25  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 10:40:25  ERROR     SOCKET_ERROR  sid=J2yrGZBUcf99NtvpAAAB  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 10:40:35  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 10:40:42  INFO      CONNECT    sid=XYDH2tekFoQQDClQAAAF  ip=127.0.0.1
+2026-06-02 10:40:42  INFO      JOIN       sid=XYDH2tekFoQQDClQAAAF  name="Piii"  room="main"  peers=3  snapshot={'cards': 1, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 1}
+2026-06-02 10:40:42  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:42  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:42  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:42  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:42  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:42  DEBUG     Serving file: 6d72dcf1-53db-4af3-921d-bead2f1299b1.pdf
+2026-06-02 10:40:43  DEBUG     WEBRTC_OFFER  from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1239  y=336
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1234  y=331
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1235  y=329
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1266  y=287
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:43  DEBUG     WEBRTC_ICE    from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:45  DEBUG     WEBRTC_ANSWER from=XYDH2tekFoQQDClQAAAF → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:45  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:45  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:45  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:45  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:45  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1260  y=274
+2026-06-02 10:40:45  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1260  y=274
+2026-06-02 10:40:45  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 10:40:46  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1264  y=262
+2026-06-02 10:40:47  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1361  y=357
+2026-06-02 10:40:47  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1357  y=357
+2026-06-02 10:40:48  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1356  y=358
+2026-06-02 10:40:49  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1355  y=358
+2026-06-02 10:40:49  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=1355  y=358
+2026-06-02 10:40:49  DEBUG     WEBRTC_OFFER  from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_OFFER  from=XYDH2tekFoQQDClQAAAF → to=-3jz_zSeaqdHHnWsAAAD
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     WEBRTC_ICE    from=XYDH2tekFoQQDClQAAAF → to=J2yrGZBUcf99NtvpAAAB
+2026-06-02 10:40:51  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=566  y=381
+2026-06-02 10:40:51  DEBUG     WEBRTC_ANSWER from=-3jz_zSeaqdHHnWsAAAD → to=XYDH2tekFoQQDClQAAAF
+2026-06-02 10:40:52  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=747  y=353
+2026-06-02 10:40:52  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=651  y=375
+2026-06-02 10:40:52  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=501  y=386
+2026-06-02 10:40:52  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=471  y=788
+2026-06-02 10:40:53  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=379  y=767
+2026-06-02 10:40:53  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=318  y=809
+2026-06-02 10:40:55  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=504  y=728
+2026-06-02 10:41:04  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=705  y=591
+2026-06-02 10:41:05  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=577  y=682
+2026-06-02 10:41:05  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=577  y=679
+2026-06-02 10:41:07  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=686  y=679
+2026-06-02 10:41:07  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=879  y=682
+2026-06-02 10:41:08  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=718  y=675
+2026-06-02 10:41:10  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=813  y=615
+2026-06-02 10:41:10  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=813  y=615
+2026-06-02 10:41:11  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=139  y=685
+2026-06-02 10:41:11  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=141  y=683
+2026-06-02 10:41:15  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=68  y=677
+2026-06-02 10:41:15  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=126  y=571
+2026-06-02 10:41:15  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=283  y=324
+2026-06-02 10:41:17  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=502  y=429
+2026-06-02 10:41:17  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=333  y=363
+2026-06-02 10:41:17  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=305  y=336
+2026-06-02 10:41:17  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=304  y=336
+2026-06-02 10:41:18  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=144  y=389
+2026-06-02 10:41:18  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=143  y=389
+2026-06-02 10:41:18  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=93  y=466
+2026-06-02 10:41:20  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=82  y=541
+2026-06-02 10:41:21  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=82  y=541
+2026-06-02 10:41:21  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=111  y=539
+2026-06-02 10:41:22  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=107  y=516
+2026-06-02 10:41:22  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=107  y=515
+2026-06-02 10:41:22  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=108  y=515
+2026-06-02 10:41:22  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=108  y=515
+2026-06-02 10:41:25  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=108  y=515
+2026-06-02 10:41:27  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=769  y=595
+2026-06-02 10:41:27  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=829  y=569
+2026-06-02 10:41:29  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=752  y=651
+2026-06-02 10:41:29  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=860  y=604
+2026-06-02 10:41:30  DEBUG     CURSOR     room="main"  sid=XYDH2tekFoQQDClQAAAF  x=348  y=35
+2026-06-02 10:41:32  ERROR     SOCKET_ERROR  sid=XYDH2tekFoQQDClQAAAF  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 10:41:33  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1458  y=6
+2026-06-02 10:41:33  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1411  y=31
+2026-06-02 10:41:33  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1411  y=30
+2026-06-02 10:41:33  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1411  y=30
+2026-06-02 10:41:33  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1411  y=28
+2026-06-02 10:41:34  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1513  y=224
+2026-06-02 10:41:34  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1508  y=226
+2026-06-02 10:41:34  DEBUG     CURSOR     room="main"  sid=-3jz_zSeaqdHHnWsAAAD  x=1508  y=226
+2026-06-02 10:41:35  ERROR     SOCKET_ERROR  sid=-3jz_zSeaqdHHnWsAAAD  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 10:41:35  ERROR     Error on request:
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 337, in execute
+    write(b"")
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 262, in write
+    assert status_set is not None, "write() before start_response"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: write() before start_response
+2026-06-02 10:44:40  INFO      CONNECT    sid=0YWJCU_mDyRboSp2AAAH  ip=127.0.0.1
+2026-06-02 10:44:40  INFO      JOIN       sid=0YWJCU_mDyRboSp2AAAH  name="Piii"  room="main"  peers=4  snapshot={'cards': 1, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 1}
+2026-06-02 10:44:41  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1311  y=168
+2026-06-02 10:44:41  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1311  y=168
+2026-06-02 10:44:42  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1309  y=210
+2026-06-02 10:44:42  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1309  y=210
+2026-06-02 10:44:42  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1310  y=210
+2026-06-02 10:44:42  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1310  y=210
+2026-06-02 10:44:43  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1283  y=159
+2026-06-02 10:44:43  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1283  y=159
+2026-06-02 10:44:43  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1283  y=158
+2026-06-02 10:44:43  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1283  y=158
+2026-06-02 10:44:44  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1294  y=176
+2026-06-02 10:44:44  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1294  y=176
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1305  y=216
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1305  y=216
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1305  y=218
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1305  y=218
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1305  y=218
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1305  y=218
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1306  y=218
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1306  y=218
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1306  y=217
+2026-06-02 10:44:45  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1306  y=217
+2026-06-02 10:44:46  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1463  y=245
+2026-06-02 10:44:46  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1463  y=245
+2026-06-02 10:44:46  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1497  y=252
+2026-06-02 10:44:46  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1497  y=252
+2026-06-02 10:44:47  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1497  y=250
+2026-06-02 10:44:47  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1497  y=250
+2026-06-02 10:44:49  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1496  y=250
+2026-06-02 10:44:49  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1496  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1493  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1493  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1493  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1493  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1492  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1492  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1492  y=250
+2026-06-02 10:44:50  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1492  y=250
+2026-06-02 10:44:51  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1492  y=250
+2026-06-02 10:44:51  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1492  y=250
+2026-06-02 10:44:51  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1493  y=249
+2026-06-02 10:44:51  DEBUG     CURSOR     room="main"  sid=0YWJCU_mDyRboSp2AAAH  x=1493  y=249
+2026-06-02 10:44:52  ERROR     SOCKET_ERROR  sid=0YWJCU_mDyRboSp2AAAH  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 10:44:52  ERROR     Error on request:
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 337, in execute
+    write(b"")
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 262, in write
+    assert status_set is not None, "write() before start_response"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: write() before start_response
+2026-06-02 11:32:15  INFO      ============================================================
+2026-06-02 11:32:15  INFO      FlexaSense server starting
+2026-06-02 11:32:15  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 11:32:15  INFO      ============================================================
+2026-06-02 11:32:15  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 11:32:15  INFO      Uploads folder cleared — new session started
+2026-06-02 11:32:15  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 11:32:15  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 11:32:15  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 11:32:23  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 11:32:29  INFO      CONNECT    sid=YKdWUTMhlSGSHNQSAAAB  ip=127.0.0.1
+2026-06-02 11:32:29  INFO      JOIN       sid=YKdWUTMhlSGSHNQSAAAB  name="Peer 423"  room="main"  peers=1  snapshot={'cards': 0, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 0}
+2026-06-02 11:32:30  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=783  y=493
+2026-06-02 11:32:30  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=783  y=493
+2026-06-02 11:32:30  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=783  y=493
+2026-06-02 11:32:33  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1438  y=163
+2026-06-02 11:32:33  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1380  y=189
+2026-06-02 11:32:33  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1381  y=189
+2026-06-02 11:32:35  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 11:32:37  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=632  y=514
+2026-06-02 11:32:38  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=197  y=764
+2026-06-02 11:32:39  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=139  y=672
+2026-06-02 11:32:39  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=139  y=672
+2026-06-02 11:32:40  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=258  y=638
+2026-06-02 11:32:40  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=257  y=638
+2026-06-02 11:32:41  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=300  y=735
+2026-06-02 11:32:41  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=299  y=735
+2026-06-02 11:32:43  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=304  y=757
+2026-06-02 11:32:44  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=298  y=777
+2026-06-02 11:32:44  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=298  y=778
+2026-06-02 11:32:44  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=298  y=778
+2026-06-02 11:32:44  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=298  y=782
+2026-06-02 11:32:45  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=306  y=807
+2026-06-02 11:32:46  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=148  y=853
+2026-06-02 11:32:46  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=168  y=832
+2026-06-02 11:32:47  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=164  y=796
+2026-06-02 11:32:48  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=164  y=817
+2026-06-02 11:32:48  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=164  y=817
+2026-06-02 11:32:48  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=149  y=768
+2026-06-02 11:32:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=158  y=788
+2026-06-02 11:32:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=158  y=788
+2026-06-02 11:32:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=156  y=777
+2026-06-02 11:32:50  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=158  y=755
+2026-06-02 11:32:51  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=157  y=741
+2026-06-02 11:32:51  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=155  y=735
+2026-06-02 11:32:51  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=155  y=735
+2026-06-02 11:32:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=159  y=710
+2026-06-02 11:32:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=159  y=710
+2026-06-02 11:32:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=159  y=710
+2026-06-02 11:32:53  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=158  y=697
+2026-06-02 11:32:53  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=158  y=685
+2026-06-02 11:32:54  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=157  y=678
+2026-06-02 11:32:54  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=157  y=668
+2026-06-02 11:32:55  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=283  y=677
+2026-06-02 11:32:55  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=283  y=677
+2026-06-02 11:32:55  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=279  y=674
+2026-06-02 11:32:56  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=289  y=674
+2026-06-02 11:32:56  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=289  y=674
+2026-06-02 11:32:57  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=384  y=619
+2026-06-02 11:32:58  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=300  y=694
+2026-06-02 11:32:58  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=300  y=694
+2026-06-02 11:32:59  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=300  y=714
+2026-06-02 11:32:59  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=300  y=714
+2026-06-02 11:33:01  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1179  y=105
+2026-06-02 11:33:01  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=197  y=639
+2026-06-02 11:33:02  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=198  y=639
+2026-06-02 11:33:02  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=198  y=639
+2026-06-02 11:33:02  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=199  y=639
+2026-06-02 11:33:03  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=195  y=520
+2026-06-02 11:33:04  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=194  y=521
+2026-06-02 11:33:11  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=838  y=438
+2026-06-02 11:33:13  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=206  y=534
+2026-06-02 11:33:13  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=206  y=534
+2026-06-02 11:33:14  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=719  y=312
+2026-06-02 11:33:15  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=691  y=303
+2026-06-02 11:33:15  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=691  y=303
+2026-06-02 11:52:17  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=838  y=553
+2026-06-02 11:52:18  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=672  y=348
+2026-06-02 11:52:18  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=753  y=367
+2026-06-02 11:52:19  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=737  y=373
+2026-06-02 11:52:19  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=723  y=373
+2026-06-02 11:52:20  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=723  y=373
+2026-06-02 11:52:21  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=724  y=373
+2026-06-02 11:52:47  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=720  y=318
+2026-06-02 11:52:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=749  y=330
+2026-06-02 11:52:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=754  y=335
+2026-06-02 11:52:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=754  y=335
+2026-06-02 11:52:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=754  y=335
+2026-06-02 11:52:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=754  y=335
+2026-06-02 11:52:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=753  y=335
+2026-06-02 11:52:50  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=662  y=245
+2026-06-02 11:52:50  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=671  y=253
+2026-06-02 11:52:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=598  y=225
+2026-06-02 11:52:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=598  y=225
+2026-06-02 11:52:54  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=704  y=302
+2026-06-02 11:52:54  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=683  y=303
+2026-06-02 11:52:54  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=682  y=303
+2026-06-02 11:52:55  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=676  y=306
+2026-06-02 11:52:56  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=676  y=306
+2026-06-02 11:52:56  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=675  y=306
+2026-06-02 11:52:57  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=725  y=392
+2026-06-02 11:52:57  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=707  y=364
+2026-06-02 11:52:59  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=558  y=380
+2026-06-02 11:53:01  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=642  y=285
+2026-06-02 11:53:01  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=642  y=285
+2026-06-02 11:53:01  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=642  y=286
+2026-06-02 11:53:01  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=642  y=286
+2026-06-02 11:53:01  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=639  y=288
+2026-06-02 11:53:03  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=639  y=288
+2026-06-02 11:53:07  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1085  y=321
+2026-06-02 11:55:34  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=531  y=288
+2026-06-02 11:55:35  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=732  y=308
+2026-06-02 11:55:35  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=672  y=281
+2026-06-02 11:55:37  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=151  y=696
+2026-06-02 11:55:37  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=150  y=697
+2026-06-02 11:55:40  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=438  y=623
+2026-06-02 11:55:41  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=433  y=626
+2026-06-02 11:55:41  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=432  y=626
+2026-06-02 11:55:41  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=140  y=693
+2026-06-02 11:55:42  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=141  y=777
+2026-06-02 11:55:43  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=141  y=775
+2026-06-02 11:55:44  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=146  y=775
+2026-06-02 11:55:45  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1389  y=21
+2026-06-02 11:55:45  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1391  y=23
+2026-06-02 11:55:46  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1302  y=245
+2026-06-02 11:55:46  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1302  y=245
+2026-06-02 11:55:46  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1361  y=160
+2026-06-02 11:55:46  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1361  y=160
+2026-06-02 11:55:47  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1360  y=177
+2026-06-02 11:55:47  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1360  y=181
+2026-06-02 11:55:47  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1360  y=181
+2026-06-02 11:55:48  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=429  y=704
+2026-06-02 11:55:48  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=129  y=664
+2026-06-02 11:55:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=127  y=665
+2026-06-02 11:55:49  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=48  y=765
+2026-06-02 11:55:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=167  y=767
+2026-06-02 11:55:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=114  y=771
+2026-06-02 11:55:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=114  y=772
+2026-06-02 11:55:52  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=113  y=772
+2026-06-02 11:55:55  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=73  y=767
+2026-06-02 11:55:56  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=121  y=772
+2026-06-02 11:55:56  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=113  y=769
+2026-06-02 11:55:57  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=91  y=767
+2026-06-02 11:55:57  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=72  y=767
+2026-06-02 11:55:57  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=69  y=767
+2026-06-02 11:55:58  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=214  y=772
+2026-06-02 11:55:58  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=178  y=768
+2026-06-02 11:59:14  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=177  y=765
+2026-06-02 11:59:15  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=443  y=126
+2026-06-02 11:59:15  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=577  y=8
+2026-06-02 11:59:16  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=782  y=27
+2026-06-02 11:59:17  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=729  y=79
+2026-06-02 12:04:38  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1189  y=417
+2026-06-02 12:04:54  DEBUG     CURSOR     room="main"  sid=YKdWUTMhlSGSHNQSAAAB  x=1123  y=188
+2026-06-02 12:05:14  INFO      ============================================================
+2026-06-02 12:05:14  INFO      FlexaSense server starting
+2026-06-02 12:05:14  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 12:05:14  INFO      ============================================================
+2026-06-02 12:05:15  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 12:05:15  INFO      Uploads folder cleared — new session started
+2026-06-02 12:05:15  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 12:05:15  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 12:05:15  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 12:05:15  INFO      CONNECT    sid=CsZNETWnGjhJSLq-AAAB  ip=127.0.0.1
+2026-06-02 12:05:15  INFO      JOIN       sid=CsZNETWnGjhJSLq-AAAB  name="Peer 423"  room="main"  peers=1  snapshot={'cards': 0, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 0}
+2026-06-02 12:05:21  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=700  y=390
+2026-06-02 12:05:21  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=700  y=390
+2026-06-02 12:05:22  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1488  y=25
+2026-06-02 12:05:22  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1488  y=25
+2026-06-02 12:05:22  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1551  y=0
+2026-06-02 12:05:22  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1551  y=0
+2026-06-02 12:05:24  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1248  y=174
+2026-06-02 12:05:24  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1248  y=174
+2026-06-02 12:05:24  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1502  y=196
+2026-06-02 12:05:24  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1502  y=196
+2026-06-02 12:05:26  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=447  y=5
+2026-06-02 12:05:26  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=447  y=5
+2026-06-02 12:05:29  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 12:05:37  INFO      CONNECT    sid=xtG5d7ycK0AlNyggAAAD  ip=127.0.0.1
+2026-06-02 12:05:37  INFO      JOIN       sid=xtG5d7ycK0AlNyggAAAD  name="Pii"  room="main"  peers=2  snapshot={'cards': 0, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 0}
+2026-06-02 12:05:38  DEBUG     WEBRTC_OFFER  from=CsZNETWnGjhJSLq-AAAB → to=xtG5d7ycK0AlNyggAAAD
+2026-06-02 12:05:38  DEBUG     WEBRTC_ICE    from=CsZNETWnGjhJSLq-AAAB → to=xtG5d7ycK0AlNyggAAAD
+2026-06-02 12:05:38  DEBUG     WEBRTC_ICE    from=CsZNETWnGjhJSLq-AAAB → to=xtG5d7ycK0AlNyggAAAD
+2026-06-02 12:05:38  DEBUG     WEBRTC_ICE    from=CsZNETWnGjhJSLq-AAAB → to=xtG5d7ycK0AlNyggAAAD
+2026-06-02 12:05:38  DEBUG     WEBRTC_ICE    from=CsZNETWnGjhJSLq-AAAB → to=xtG5d7ycK0AlNyggAAAD
+2026-06-02 12:05:38  DEBUG     WEBRTC_ANSWER from=xtG5d7ycK0AlNyggAAAD → to=CsZNETWnGjhJSLq-AAAB
+2026-06-02 12:05:38  DEBUG     WEBRTC_ICE    from=xtG5d7ycK0AlNyggAAAD → to=CsZNETWnGjhJSLq-AAAB
+2026-06-02 12:05:38  DEBUG     WEBRTC_ICE    from=xtG5d7ycK0AlNyggAAAD → to=CsZNETWnGjhJSLq-AAAB
+2026-06-02 12:05:38  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 12:05:38  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1413  y=213
+2026-06-02 12:05:38  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1413  y=213
+2026-06-02 12:05:38  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1412  y=213
+2026-06-02 12:05:39  DEBUG     WEBRTC_OFFER  from=xtG5d7ycK0AlNyggAAAD → to=CsZNETWnGjhJSLq-AAAB
+2026-06-02 12:05:39  DEBUG     WEBRTC_ANSWER from=CsZNETWnGjhJSLq-AAAB → to=xtG5d7ycK0AlNyggAAAD
+2026-06-02 12:05:41  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=851  y=683
+2026-06-02 12:05:41  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=851  y=681
+2026-06-02 12:05:42  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=341  y=746
+2026-06-02 12:05:42  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=134  y=782
+2026-06-02 12:05:42  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=150  y=768
+2026-06-02 12:05:43  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=149  y=768
+2026-06-02 12:05:43  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=149  y=768
+2026-06-02 12:05:44  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=70  y=771
+2026-06-02 12:05:45  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=855  y=662
+2026-06-02 12:05:46  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1212  y=440
+2026-06-02 12:05:46  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1212  y=440
+2026-06-02 12:05:46  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1212  y=440
+2026-06-02 12:05:46  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1212  y=440
+2026-06-02 12:05:47  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1319  y=105
+2026-06-02 12:05:47  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1317  y=37
+2026-06-02 12:05:48  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1308  y=31
+2026-06-02 12:05:48  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1305  y=30
+2026-06-02 12:05:49  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1304  y=30
+2026-06-02 12:05:49  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1318  y=33
+2026-06-02 12:05:49  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1318  y=33
+2026-06-02 12:05:51  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1314  y=30
+2026-06-02 12:05:52  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1302  y=31
+2026-06-02 12:05:52  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1302  y=31
+2026-06-02 12:05:53  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1319  y=31
+2026-06-02 12:05:53  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1319  y=30
+2026-06-02 12:05:53  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1554  y=256
+2026-06-02 12:05:54  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1519  y=223
+2026-06-02 12:05:55  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1510  y=216
+2026-06-02 12:05:56  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1508  y=215
+2026-06-02 12:05:56  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1507  y=215
+2026-06-02 12:05:56  DEBUG     CURSOR     room="main"  sid=xtG5d7ycK0AlNyggAAAD  x=1507  y=215
+2026-06-02 12:05:56  ERROR     SOCKET_ERROR  sid=xtG5d7ycK0AlNyggAAAD  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 12:05:56  ERROR     Error on request:
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 337, in execute
+    write(b"")
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 262, in write
+    assert status_set is not None, "write() before start_response"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: write() before start_response
+2026-06-02 12:05:59  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=266  y=264
+2026-06-02 12:05:59  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=266  y=264
+2026-06-02 12:06:00  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=384  y=507
+2026-06-02 12:06:00  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=384  y=507
+2026-06-02 12:06:02  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=113  y=678
+2026-06-02 12:06:02  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=113  y=678
+2026-06-02 12:06:02  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=112  y=678
+2026-06-02 12:06:02  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=112  y=678
+2026-06-02 12:06:02  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=703
+2026-06-02 12:06:02  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=703
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:03  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=114  y=702
+2026-06-02 12:06:04  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=115  y=702
+2026-06-02 12:06:04  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=115  y=702
+2026-06-02 12:06:05  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=197  y=792
+2026-06-02 12:06:05  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=197  y=792
+2026-06-02 12:06:05  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=196  y=790
+2026-06-02 12:06:05  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=196  y=790
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=759
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=759
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=759
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=759
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:06  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:07  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:07  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=180  y=761
+2026-06-02 12:06:07  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=248  y=754
+2026-06-02 12:06:07  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=248  y=754
+2026-06-02 12:06:12  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1332  y=437
+2026-06-02 12:06:12  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1332  y=437
+2026-06-02 12:06:25  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1332  y=437
+2026-06-02 12:06:25  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1332  y=437
+2026-06-02 12:06:36  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1121  y=494
+2026-06-02 12:06:36  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1121  y=494
+2026-06-02 12:06:37  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1121  y=491
+2026-06-02 12:06:37  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1121  y=491
+2026-06-02 12:06:38  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=589  y=256
+2026-06-02 12:06:38  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=589  y=256
+2026-06-02 12:14:11  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=452  y=267
+2026-06-02 12:14:11  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=452  y=267
+2026-06-02 12:14:13  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=152  y=780
+2026-06-02 12:14:13  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=152  y=780
+2026-06-02 12:14:14  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=493  y=631
+2026-06-02 12:14:14  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=493  y=631
+2026-06-02 12:14:15  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=480  y=626
+2026-06-02 12:14:15  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=480  y=626
+2026-06-02 12:14:16  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=464  y=628
+2026-06-02 12:14:16  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=464  y=628
+2026-06-02 12:14:17  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=464  y=628
+2026-06-02 12:14:17  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=464  y=628
+2026-06-02 12:14:18  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=467  y=193
+2026-06-02 12:14:18  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=467  y=193
+2026-06-02 12:14:41  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1170  y=298
+2026-06-02 12:14:41  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1170  y=298
+2026-06-02 12:14:47  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1433  y=22
+2026-06-02 12:14:47  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1433  y=22
+2026-06-02 12:14:48  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1492  y=206
+2026-06-02 12:14:48  DEBUG     CURSOR     room="main"  sid=CsZNETWnGjhJSLq-AAAB  x=1492  y=206
+2026-06-02 12:14:48  ERROR     SOCKET_ERROR  sid=CsZNETWnGjhJSLq-AAAB  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 12:14:48  ERROR     Error on request:
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 337, in execute
+    write(b"")
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 262, in write
+    assert status_set is not None, "write() before start_response"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: write() before start_response
+2026-06-02 13:46:28  INFO      ============================================================
+2026-06-02 13:46:28  INFO      FlexaSense server starting
+2026-06-02 13:46:28  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 13:46:28  INFO      ============================================================
+2026-06-02 13:46:29  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 13:46:29  INFO      Uploads folder cleared — new session started
+2026-06-02 13:46:29  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 13:46:29  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 13:46:29  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 13:46:35  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 13:46:36  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 13:47:35  INFO      CONNECT    sid=AIf5DcoKWzmezfX7AAAB  ip=127.0.0.1
+2026-06-02 13:47:35  INFO      JOIN       sid=AIf5DcoKWzmezfX7AAAB  name="Peer 607"  room="main"  peers=1  snapshot={'cards': 0, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 0}
+2026-06-02 13:47:37  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1407  y=190
+2026-06-02 13:47:38  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 13:47:38  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1405  y=334
+2026-06-02 13:47:40  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1404  y=334
+2026-06-02 13:47:41  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1469  y=52
+2026-06-02 13:47:41  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1468  y=67
+2026-06-02 13:47:42  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1468  y=69
+2026-06-02 13:47:42  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1468  y=69
+2026-06-02 13:47:53  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1534  y=12
+2026-06-02 13:47:53  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1514  y=128
+2026-06-02 13:47:53  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1508  y=125
+2026-06-02 13:47:53  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1508  y=124
+2026-06-02 13:47:53  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1507  y=124
+2026-06-02 13:47:54  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1241  y=131
+2026-06-02 13:47:55  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1382  y=35
+2026-06-02 13:47:56  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1315  y=22
+2026-06-02 13:47:56  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1315  y=23
+2026-06-02 13:47:57  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1401  y=25
+2026-06-02 13:47:57  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1401  y=24
+2026-06-02 13:47:59  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1312  y=25
+2026-06-02 13:47:59  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1312  y=25
+2026-06-02 13:48:01  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1320  y=34
+2026-06-02 13:48:01  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1320  y=33
+2026-06-02 13:48:03  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1306  y=24
+2026-06-02 13:48:03  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1278  y=51
+2026-06-02 13:48:03  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1216  y=46
+2026-06-02 13:48:04  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1396  y=22
+2026-06-02 13:48:04  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1395  y=22
+2026-06-02 13:48:04  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1395  y=22
+2026-06-02 13:48:05  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1395  y=26
+2026-06-02 13:48:07  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1477  y=171
+2026-06-02 13:48:07  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1372  y=137
+2026-06-02 13:48:08  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1372  y=146
+2026-06-02 13:48:08  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1366  y=146
+2026-06-02 13:48:08  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1358  y=152
+2026-06-02 13:48:09  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1359  y=152
+2026-06-02 13:48:11  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1509  y=203
+2026-06-02 13:48:12  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1498  y=190
+2026-06-02 13:48:12  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1498  y=189
+2026-06-02 13:48:12  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1498  y=189
+2026-06-02 13:48:12  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1498  y=189
+2026-06-02 13:48:13  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1375  y=159
+2026-06-02 13:48:13  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1363  y=149
+2026-06-02 13:48:13  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1370  y=149
+2026-06-02 13:48:14  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1277  y=150
+2026-06-02 13:48:15  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1471  y=189
+2026-06-02 13:48:15  DEBUG     CURSOR     room="main"  sid=AIf5DcoKWzmezfX7AAAB  x=1471  y=189
+2026-06-02 13:48:16  ERROR     SOCKET_ERROR  sid=AIf5DcoKWzmezfX7AAAB  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 13:48:16  ERROR     Error on request:
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 337, in execute
+    write(b"")
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 262, in write
+    assert status_set is not None, "write() before start_response"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: write() before start_response
+2026-06-02 13:48:22  INFO      CONNECT    sid=LJ9vhcHfR0V8DF6lAAAD  ip=127.0.0.1
+2026-06-02 13:48:22  INFO      JOIN       sid=LJ9vhcHfR0V8DF6lAAAD  name="ria"  room="main"  peers=2  snapshot={'cards': 0, 'stickies': 0, 'strokes': 0, 'links': 0, 'files': 0}
+2026-06-02 13:48:22  DEBUG     CURSOR     room="main"  sid=LJ9vhcHfR0V8DF6lAAAD  x=1482  y=246
+2026-06-02 13:48:22  DEBUG     CURSOR     room="main"  sid=LJ9vhcHfR0V8DF6lAAAD  x=1482  y=246
+2026-06-02 13:48:24  DEBUG     CURSOR     room="main"  sid=LJ9vhcHfR0V8DF6lAAAD  x=1481  y=246
+2026-06-02 13:48:24  DEBUG     CURSOR     room="main"  sid=LJ9vhcHfR0V8DF6lAAAD  x=1481  y=246
+2026-06-02 13:48:25  DEBUG     CURSOR     room="main"  sid=LJ9vhcHfR0V8DF6lAAAD  x=1486  y=214
+2026-06-02 13:48:25  DEBUG     CURSOR     room="main"  sid=LJ9vhcHfR0V8DF6lAAAD  x=1486  y=214
+2026-06-02 13:48:25  ERROR     SOCKET_ERROR  sid=LJ9vhcHfR0V8DF6lAAAD  error=on_disconnect() takes 0 positional arguments but 1 was given
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask_socketio/__init__.py", line 858, in _handle_event
+    ret = handler(*args)
+          ^^^^^^^^^^^^^^
+TypeError: on_disconnect() takes 0 positional arguments but 1 was given
+2026-06-02 13:48:25  ERROR     Error on request:
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 371, in run_wsgi
+    execute(self.server.app)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 337, in execute
+    write(b"")
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/serving.py", line 262, in write
+    assert status_set is not None, "write() before start_response"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: write() before start_response
+2026-06-02 13:52:53  INFO      ============================================================
+2026-06-02 13:52:53  INFO      FlexaSense server starting
+2026-06-02 13:52:53  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 13:52:53  INFO      ============================================================
+2026-06-02 13:52:53  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 13:52:53  INFO      Uploads folder cleared — new session started
+2026-06-02 13:52:53  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 13:52:53  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 13:52:53  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 13:52:57  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 13:52:58  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 13:53:35  INFO      Session reset — uploads and room state cleared
+2026-06-02 13:53:58  INFO      Session reset — uploads and room state cleared
+2026-06-02 14:03:18  INFO      ============================================================
+2026-06-02 14:03:18  INFO      FlexaSense server starting
+2026-06-02 14:03:18  INFO      Log file: /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:03:18  INFO      ============================================================
+2026-06-02 14:03:18  INFO      pypdf available — PDF text extraction enabled
+2026-06-02 14:03:18  INFO      Uploads folder cleared — new session started
+2026-06-02 14:03:18  INFO      Starting server on 0.0.0.0:5050
+2026-06-02 14:03:18  INFO      Debug room state: http://localhost:5050/collab/debug
+2026-06-02 14:03:18  INFO      Log file:         /Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/app.log
+2026-06-02 14:03:34  DEBUG     GET /  →  client 127.0.0.1
+2026-06-02 14:03:35  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+2026-06-02 14:04:06  ERROR     HTTP_ERROR  GET /favicon.ico  error=404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+Traceback (most recent call last):
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 891, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/app.py", line 500, in raise_routing_exception
+    raise request.routing_exception  # type: ignore[misc]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/flask/ctx.py", line 362, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nushrat/Desktop/HCI_Lab/Project_3 Flexee_node/woz dev/flexeesense_woz/venv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 629, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
